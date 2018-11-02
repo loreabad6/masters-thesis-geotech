@@ -68,8 +68,8 @@ driver <- dbDriver("PostgreSQL")
 # THE CONNECTION VARIABLE WILL BE USED FOR ALL FURTHER OPERATIONS
 connection <- dbConnect(driver, dbname = "test_osm2pgsql",
                  host = "localhost", port = 5432,
-                 user = Sys.getenv("userid"),
-                 password = Sys.getenv("pwd"))
+                 user = getOption("database_userid"),
+                 password = getOption("database_password"))
 
 library(sf)
 slope_ways <- st_read(
