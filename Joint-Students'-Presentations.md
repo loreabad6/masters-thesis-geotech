@@ -1,4 +1,4 @@
-# Joint Student's Presentations:
+# Joint Students' Presentations:
 
 Every month I present advancements of my thesis, regarding these topics:
 
