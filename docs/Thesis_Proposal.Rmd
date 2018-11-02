@@ -64,7 +64,7 @@ This section includes a description of the background work on which the first pa
 
 ### <a id="PfB"></a>PfB approach
 
-Bicycle network analyses have been undertaken from several angles making use of GIS tools. A recurrent approach within the literature is the level of traffic stress (LTS). @Mekuria2012a, proposed a scheme to classify the road segments in four LTS, ranging from 1 – the level suitable for children - to 4 – the level tolerated by the “strong and fearless” cyclists. Their approach includes an analysis of the network
+Bicycle network analyses have been undertaken from several angles making use of GIS tools. A recurrent approach within the literature is the level of traffic stress (LTS). @Mekuria2012a, proposed a scheme to classify the road segments in four LTS, ranging from 1 - the level suitable for children - to 4 - the level tolerated by the "strong and fearless" cyclists. Their approach includes an analysis of the network
 connectivity with a thorough review of every segment and crossing, allowing an integral characterization of the bike network and assigning each section a stress level.
 
 The [PeopleForBikes](https://peopleforbikes.org/) (PfB) organization developed a Bike Network Analysis (BNA), based on slightly modified LTS, to determine how people could get to common destinations on a comfortable and connected bike network [@PeopleforBikes2014]. Their application targets USA cities and towns, basing their analysis mainly on OpenStreetMap data.
