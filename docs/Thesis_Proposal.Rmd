@@ -3,7 +3,7 @@ title: Optimizing connectivity of urban cycling infrastructure through a bike ne
 subtitle: Thesis Proposal
 author: "Lorena Abad"
 date: "July 13, 2018"
-bibliography: Mendeley/GPS.bib
+bibliography: GPS.bib
 fig_caption: TRUE
 output: 
   html_document:
