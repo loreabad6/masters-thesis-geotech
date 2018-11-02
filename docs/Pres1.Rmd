@@ -40,7 +40,7 @@ class: center, top
 
 ## Aim
 
-Develop a methodology to optimize urban cycling networks’ connectivity based on a quantitative index known as bike network analysis score.
+Develop a methodology to optimize urban cycling networks' connectivity based on a quantitative index known as bike network analysis score.
 
 .center[<img src="bna.jpg" style="width: 50%" />]
 
