@@ -45,72 +45,6 @@ Develop a methodology to optimize urban cycling networks’ connectivity based o
 .center[<img src="bna.jpg" style="width: 50%" />]
 
 ---
-class: center, top
-
-## Timeline
-
-```{r schedule, warning=FALSE, echo=FALSE, message=FALSE}
-library(vistime)
-
-data <- data.frame(
-  objective = c(rep("Objective 1", 5), 
-                rep("Objective 2", 6),
-                rep("Objective 3", 5),
-                rep("Objective 4", 2),
-                rep("Final steps", 2)),
-  activity = c("1.1", "1.2", "1.3", "1.4", "1.5",
-              "2.1", "2.2", "2.3", "2.4", "2.5", "2.6",
-              "3.1", "3.2", "3.3", "3.4", "3.5", 
-              "4.1", "4.2", "Thesis writing", "Presentation"),
-  start   = c("2018-09-10", "2018-09-17", "2018-09-24", "2018-10-01", "2018-10-08",
-              "2018-10-15", "2018-10-22", "2018-10-29", "2018-11-05", "2018-11-12", "2018-11-19",
-              "2018-11-26", "2018-12-03", "2018-12-17", "2018-12-26", "2019-01-04",
-              "2019-01-12", "2019-01-21", "2019-01-14", "2019-02-05"),
-  end     = c("2018-09-16", "2018-09-23", "2018-09-30", "2018-10-07", "2018-10-14",
-              "2018-10-21", "2018-10-28", "2018-11-04", "2018-11-11", "2018-11-18", "2018-11-25",
-              "2018-12-08", "2018-12-16", "2018-12-23", "2019-01-03", "2019-01-11",
-              "2019-01-20", "2019-01-27", "2019-02-02", NA),
-  color   = c("#ff5752", "#fb5b56", "#f65f5a", "#f2645f", "#ee6863",
-              "#ec6864", "#e96c67", "#e5706c", "#e17470", "#dc7874", "#d87c79",
-              "#d4807d", "#cf8481", "#cb8886", "#c78c8a", "#c2908e",
-              "#be9493", "#ba9897", "#b59c9b", "#9f1814")
-)
-
-p <- vistime(data, events = "activity", groups = "objective")
-
-# step 1: transform into a list
-pp <- plotly_build(p)
-
-# step 2: loop over pp$x$data, and change the font size of all text elements to 10 and times new roman
-t <- list(
-  family = "times new roman",
-  size = 11)
-
-pp$x$data <- lapply(pp$x$data, function(x){
- if(x$mode == "text"){
-       x$textfont <- t
-       return(x)
-  }else{
-       return(x)
-  }})
-
-# step 3: change axis font
-
-pp$x$layout$xaxis$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis2$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis3$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis4$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis5$tickfont <- list(family = "times new roman", size = 12)
-pp$x$layout$yaxis6$tickfont <- list(family = "times new roman", size = 12)
-
-pp %>%
-  layout(autosize = F, width = 1000, height = 500)
-
-pp
-```
-
----
 background-image: url(https://images.unsplash.com/photo-1520431626067-a140ac2122f3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3ea2f69f37c5648845e4c3ca88838f7a)
 background-size: cover
 class: center, top
@@ -134,7 +68,9 @@ driver <- dbDriver("PostgreSQL")
 # THE CONNECTION VARIABLE WILL BE USED FOR ALL FURTHER OPERATIONS
 connection <- dbConnect(driver, dbname = "test_osm2pgsql",
                  host = "localhost", port = 5432,
-                 user = "postgres", password = "das8410")
+                 user = Sys.getenv("userid"),
+                 password = Sys.getenv("pwd"))
+
 library(sf)
 slope_ways <- st_read(
   dsn = connection,
