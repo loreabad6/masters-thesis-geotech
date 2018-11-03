@@ -7,13 +7,15 @@ output:
     toc: true
     toc_depth: 3
     toc_float: true
-    theme: flatly
+    theme: journal
     code_folding: hide
     df_print: tibble
 ---
 The codes below will allow the computation of the [BNA score](https://bna.peopleforbikes.org/#/) for any city in Europe. The coding languages are a combination of R and SQL, with a few lines passed onto the Command Prompt.
 
-## Workflow step by step
+# Case study: Cambridge, UK {.tabset}
+
+## Workflow step by step 
 
 ### 1. Establish a connection with the PostgreSQL server and establish basic parameters of analysis.
 
@@ -21,7 +23,7 @@ Within this step, three major things are performed, assuming that the user has c
 
 #### - Create connection and test it
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 start <- Sys.time()
 ```
 
@@ -33,7 +35,7 @@ port_num = 5432
 user_name = "postgres"
 ```
 
-```{r, echo = TRUE, include = TRUE}
+```{r, echo = TRUE, include = TRUE, warning = FALSE}
 library(RPostgreSQL)
 
 # LOAD POSTGRESQL DRIVER
@@ -74,7 +76,7 @@ CREATE SCHEMA IF NOT EXISTS received;
 
 Not only the name of the study area should be established, but also the number of subdivisions for the grid, the coordinate reference system to work with, and the biking distance that will be assumed for the connectivity analysis. 
 
-```{r}
+```{r, warning = FALSE}
 sa_name = "Cambridge"
 subdivisions = 4
 sa_crs = 3857
@@ -84,15 +86,21 @@ paste("You are running the BNA score for", sa_name, "within a biking distance of
 
 ### 2. Obtain study area boundary with `osmdata`.
 
-```{r, echo = TRUE, include = TRUE}
+Extract the study area boundary considering a buffer of half the biking distance established. 
+
+```{r, echo = TRUE, include = TRUE, warning = FALSE}
 # FUNCTION TO EXTRACT STUDY AREA BOUNDARY WITH OSM AND WRITE IT TO THE DATABASE
-sa_bb <- function (study_area, crs, conn){
+sa_bb <- function (study_area, dist, crs, conn){
   # GET DATA FROM OSM
   library(osmdata)
   library(sf)
   study_area_bb <- study_area %>% 
     getbb(format_out = "sf_polygon") %>%
     st_transform(crs = crs)
+  
+  ## ADD A BUFFER TO THE BOUNDARY
+  study_area_bb <-study_area_bb %>% 
+    st_buffer(dist = 0.5*dist)
   
   # DELETE EXISTING BOUNDARY
   library(sqldf)
@@ -110,10 +118,13 @@ sa_bb <- function (study_area, crs, conn){
 
 boundary <- sa_bb(
   study_area = sa_name, 
+  dist = biking_distance,
   crs = sa_crs, 
   conn = connection
 )
+```
 
+```{r, fig.width = 8, fig.height= 8, echo = TRUE, warning = FALSE}
 library(tmap)
 tmap_mode("view")
 qtm(
@@ -126,7 +137,7 @@ qtm(
 
 ### 3. Obtain the `.osm` file from **Overpass API**
 
-```{r}
+```{r, warning = FALSE}
 # FUNCTION TO DOWNLOAD OSM DATA WITH THE OVERPASS API 
 sa_download <- function(conn){
   # OBTAIN THE EXTENT OF THE STUDY AREA AS A BOUNDING BOX
@@ -179,7 +190,7 @@ sa_download(conn = connection)
 
 #### - Obtain configuration files
 
-```{r, collapse = TRUE}
+```{r, collapse = TRUE, warning = FALSE}
 # CREATE A NEW TEMPORAL DIRECTORY TO DOWNLOAD THE INFO
 cd <- getwd()
 ifelse(
@@ -222,7 +233,7 @@ if(
 
 **NOTE:** To run this command create a password file on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 system(
   command = "osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S E:/GeoTech/Thesis/Thesis_R_Project/temp/pfb.style E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm --cache 600",
   show.output.on.console = TRUE
@@ -241,7 +252,7 @@ system(
 
 Replace variables between `%`:
 
-```{r, echo = TRUE, eval = FALSE, include = TRUE}
+```{r, echo = TRUE, eval = FALSE, include = TRUE, warning = FALSE}
 system(
   command = "osm2pgsql -c -d %DBNAME% -U %USERNAME% -H %HOSTNAME% -W --create --prefix sa_full -S %CURRENTDIRECTORY/temp/pfb.style% %CURRENTDIRECTORY/temp/overpass.osm% --cache 600",
   show.output.on.console = TRUE
@@ -1398,7 +1409,7 @@ WHERE   functional_class IN ('motorway','motorway_link','trunk','trunk_link');
 
 ##### > higher order
 
-```{r higher order, include = FALSE}
+```{r higher order, include = FALSE, warning = FALSE}
 stress_higher_order_ways <- function(
   class, 
   default_speed, 
@@ -1639,7 +1650,7 @@ stress_higher_order_ways(
 
 ##### > lower order
 
-```{r lower order, include = FALSE}
+```{r lower order, include = FALSE, warning = FALSE}
 
 stress_lower_order_ways <- function(
   class, 
@@ -1810,7 +1821,7 @@ WHERE   functional_class = 'secondary';
 
 ##### > tertiary intersection 
 
-```{r tertiary intersection, include = FALSE}
+```{r tertiary intersection, include = FALSE, warning = FALSE}
 stress_tertiary_int <- function(
   primary_speed, 
   secondary_speed, 
@@ -2234,7 +2245,7 @@ stress_tertiary_int(
 
 ##### > lower intersection 
 
-```{r lower intersection, include = FALSE}
+```{r lower intersection, include = FALSE, warning = FALSE}
 stress_lower_int <- function(
   primary_speed,
   secondary_speed,
@@ -3219,7 +3230,7 @@ So, this is one of the main differences regarding the PfB approach and mine. Ins
 
 #### - Download data from [EUROSTAT](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/population-distribution-demography/geostat) and load into DB
 
-```{r}
+```{r, warning = FALSE}
 ## Download data and load to PostgreSQL
 if (!dbExistsTable(connection, c("received","geostat"))){
   
@@ -3322,7 +3333,7 @@ DROP TABLE IF EXISTS received.pop_table;
 
 #### - Generate subdivision with a grid, adding partial population and unique ID
 
-```{r}
+```{r, warning = FALSE}
 sqldf::sqldf(
   "
 DROP TABLE IF EXISTS received.sa_geostat;
@@ -3400,7 +3411,9 @@ RPostgreSQL::dbWriteTable(
   name = c("generated","sa_pop_grid"),
   value = sa_grid
 )
+```
 
+```{r, fig.width = 8, fig.height= 8,  echo = TRUE, warning = FALSE}
 library(tmap)
 tmap_mode("view")
 qtm(
@@ -3523,7 +3536,7 @@ ALTER TABLE generated.sa_pop_grid ADD COLUMN overall_score FLOAT;
 SELECT * FROM generated.sa_pop_grid;
 ```
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 sqldf(
   "
 -- indexes
@@ -3563,7 +3576,7 @@ ALTER TABLE generated.sa_pop_grid DROP COLUMN IF EXISTS tmp_geom_buffer;
 SELECT * FROM generated.sa_pop_grid;
 ```
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 sqldf(
   "
 -- index
@@ -3636,7 +3649,7 @@ CREATE INDEX IF NOT EXISTS idx_sa_rchblrdshistrss_t ON generated.sa_reachable_ro
 -- check on this, does not work good because: Key (base_road, target_road)=(1798, 3193) is duplicated.
 ```
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 library(sqldf)
 sqldf(
   "
@@ -3707,7 +3720,7 @@ CREATE INDEX IF NOT EXISTS idx_sa_rchblrdslowstrss_t ON generated.sa_reachable_r
 SELECT * FROM generated.sa_reachable_roads_low_stress;
 ```
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 library(sqldf)
 sqldf(
   "
@@ -3813,7 +3826,7 @@ To compute access on this an the next step, a weighting procedure is used, as th
 
 A quick glance of the weights used, mainly for *step 11*:
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 library(kableExtra)
 tbl <- data.frame(
   scorcat = cell_spec(
@@ -4860,7 +4873,7 @@ SELECT * FROM destinations.sa_universities;
 
 Where the access to the destinations established before is computed. Access to recreational trails and bike paths is also included.
 
-```{r, include = FALSE}
+```{r, include = FALSE, warning = FALSE}
 
 max_score = 1
 
@@ -9746,7 +9759,7 @@ SELECT * FROM generated.sa_overall_scores
 
 The overall results obtained include the final score for the whole city, as well as the score per destination category. The total population and stress network is also calculated. The results can be observed on the following table. 
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE}
 bna_display <- bna_score
 
 bna_display$category <- c(
@@ -9834,27 +9847,27 @@ kable(
 
 We can plot the results to have a quick view of the output, including the high and low stress network in an interactive way. 
 
-```{r}
+```{r, warning = FALSE}
 library(sf)
-pop <- st_read(
+bna_score <- st_read(
   dsn = connection,
   layer = c("generated","sa_pop_grid")
 )
 
-ways <- st_read(
+stress_network <- st_read(
   dsn = connection,
   query = "SELECT ft_seg_stress, tf_seg_stress, geom FROM received.sa_ways"
 )
 ```
 
-```{r}
+```{r, fig.width = 8, fig.height= 8,  echo = TRUE, warning = FALSE}
 bna_pal <- c("#FC7151","#DC7E6A","#C98875","#C08B83","#AD9396",
              "#9C9A9F","#929EAC","#78AAC5","#6FADCB","#49BFE6")
 
 bna_breaks <- c(6,12,18,24,30,36,42,48,54,100)
 
-ways$ft_stress <- ifelse(ways$ft_seg_stress == 1,"low stress","high stress")
-ways$tf_stress <- ifelse(ways$tf_seg_stress == 1,"low stress","high stress")
+stress_network$ft_stress <- ifelse(ways$ft_seg_stress == 1,"low stress","high stress")
+stress_network$tf_stress <- ifelse(ways$tf_seg_stress == 1,"low stress","high stress")
 
 library(tmap)
 tmap_mode("view")
@@ -9867,7 +9880,7 @@ int_map <-
        "OpenStreetMap.Mapnik"
      )
    ) +
-     tmap::tm_shape(pop) +
+     tmap::tm_shape(bna_score) +
      tmap::tm_polygons(
        col = "overall_score",
        style = "fixed",
@@ -9879,7 +9892,7 @@ int_map <-
        colorNA = NULL,
        showNA = FALSE
       ) +
-     tmap::tm_shape(ways) +
+     tmap::tm_shape(stress_network) +
      tmap::tm_lines(
        col = "ft_stress", 
        colorNA = NULL,
@@ -9887,7 +9900,7 @@ int_map <-
        palette = c("firebrick1", "deepskyblue3"),
        title.col = "Stress network"
       ) +
-     tmap::tm_shape(ways) +
+     tmap::tm_shape(stress_network) +
      tmap::tm_lines(
        col = "tf_stress", 
        colorNA = NULL,
@@ -9902,15 +9915,15 @@ int_map
 
 ## Observations
 
-* The total time that this particular city took to compute its BNA, including plots and data download was:
-
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning = FALSE, include = FALSE}
 end <- Sys.time()
 
 duration <- end - start
 
 duration
 ```
+
+* The total time that this particular city took to compute its BNA, including plots, overpass download, but without `GEOSTAT` data download on system, upload on file, and processing on database was **`r round(as.numeric(duration),2)` minutes**. Adding the `GEOSTAT` proccessing to the workflow adds around 5 minutes.
 
 * What can be observd for the whole analysis is that the resulting BNA score is highly influenced by the fact that the job/employment data is not available. However, this was an attempt to reproduce the score as close as possible as PfB apply their methodology, just to explore its reproducibility. 
 
