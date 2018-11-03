@@ -9921,6 +9921,8 @@ end <- Sys.time()
 duration <- end - start
 
 duration
+
+dbDisconnect(connection)
 ```
 
 * The total time that this particular city took to compute its BNA, including plots, overpass download, but without `GEOSTAT` data download on system, upload on file, and processing on database was **`r round(as.numeric(duration),2)` minutes**. Adding the `GEOSTAT` proccessing to the workflow adds around 5 minutes.
