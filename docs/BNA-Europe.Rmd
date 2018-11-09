@@ -11,6 +11,10 @@ output:
     code_folding: hide
     df_print: tibble
 ---
+[![GitHub](GitHub-Mark-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech) 
+
+*Check out my github repository for more content and updates on this project.*
+
 The codes below will allow the computation of the [BNA score](https://bna.peopleforbikes.org/#/) for any city in Europe. The coding languages are a combination of R and SQL, with a few lines passed onto the Command Prompt.
 
 # Case study: Cambridge, UK {.tabset}
@@ -19,7 +23,7 @@ The codes below will allow the computation of the [BNA score](https://bna.people
 
 ### 1. Establish a connection with the PostgreSQL server and establish basic parameters of analysis.
 
-Within this step, three major things are performed, assuming that the user has created a database on its PostgreSQL. To test conneciton an empty table on the database called "test" was created on the public schema.
+Within this step, three major things are performed, assuming that the user has created a database on its PostgreSQL. To test connection an empty table on the database called "test" was created on the public schema.
 
 #### - Create connection and test it
 
@@ -231,7 +235,7 @@ if(
 
 #### - Load data with `osm2pgsql` and `osm2pgrouting`
 
-**NOTE:** To run this command create a password file on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password
+**NOTE:** To run this command [set path variables](https://learnosm.org/en/osm-data/osm2pgsql/) for `osm2pgsql` and `osm2pgrouting` and [create a password file](https://www.postgresql.org/docs/9.1/libpq-pgpass.html) on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password.
 
 ```{r, include = FALSE, warning = FALSE}
 system(
@@ -3428,7 +3432,7 @@ Plotting the grid on this step can allow the analyst decide on a better number o
 
 #### - Prepare the population grid table
 
-This step is only generating new columns on my new Population Grid table. It follows the same logic as the PfB and therefore won't be inlcuded on this document explicitely. 
+This step is only generating new columns on my new Population Grid table. It follows the same logic as the PfB and therefore won't be included on this document explicitly. 
 
 ```{sql, connection = connection, output.var = "output", include = FALSE}
 ALTER TABLE generated.sa_pop_grid DROP COLUMN IF EXISTS road_ids;
@@ -9339,7 +9343,7 @@ WHERE   EXISTS (
 SELECT * FROM generated.sa_score_inputs;
 ```
 
-```{sql, connection = connection, include = FALSE, output.var = "bna_score"}
+```{sql, connection = connection, include = FALSE, output.var = "bna_score_table"}
 
 DROP TABLE IF EXISTS generated.sa_overall_scores;
 
@@ -9760,7 +9764,7 @@ SELECT * FROM generated.sa_overall_scores
 The overall results obtained include the final score for the whole city, as well as the score per destination category. The total population and stress network is also calculated. The results can be observed on the following table. 
 
 ```{r, echo = FALSE, warning = FALSE}
-bna_display <- bna_score
+bna_display <- bna_score_table
 
 bna_display$category <- c(
   "Total People",
@@ -9866,8 +9870,8 @@ bna_pal <- c("#FC7151","#DC7E6A","#C98875","#C08B83","#AD9396",
 
 bna_breaks <- c(6,12,18,24,30,36,42,48,54,100)
 
-stress_network$ft_stress <- ifelse(ways$ft_seg_stress == 1,"low stress","high stress")
-stress_network$tf_stress <- ifelse(ways$tf_seg_stress == 1,"low stress","high stress")
+stress_network$ft_stress <- ifelse(stress_network$ft_seg_stress == 1,"low stress","high stress")
+stress_network$tf_stress <- ifelse(stress_network$tf_seg_stress == 1,"low stress","high stress")
 
 library(tmap)
 tmap_mode("view")
@@ -9925,9 +9929,9 @@ duration
 dbDisconnect(connection)
 ```
 
-* The total time that this particular city took to compute its BNA, including plots, overpass download, but without `GEOSTAT` data download on system, upload on file, and processing on database was **`r round(as.numeric(duration),2)` minutes**. Adding the `GEOSTAT` proccessing to the workflow adds around 5 minutes.
+* The total time that this particular city took to compute its BNA, including plots, overpass download, but without `GEOSTAT` data download on system, upload on file, and processing on database was **`r round(as.numeric(duration),2)` minutes**. Adding the `GEOSTAT` processing to the workflow adds around 5 minutes. Of course this is also subject to internet speed and computer performance. I run my analysis on an Asus F541U, Intel Core i7, 8GB RAM and 256 GB SSD, with Windows 10 OS.
 
-* What can be observd for the whole analysis is that the resulting BNA score is highly influenced by the fact that the job/employment data is not available. However, this was an attempt to reproduce the score as close as possible as PfB apply their methodology, just to explore its reproducibility. 
+* What can be observed for the whole analysis is that the resulting BNA score is highly influenced by the fact that the job/employment data is not available. However, this was an attempt to reproduce the score as close as possible as PfB apply their methodology, just to explore its reproducibility. 
 
 * My plan next is to exclude this variable from the BNA score computation, and perhaps include some other variables that would suit the European context better. 
 
