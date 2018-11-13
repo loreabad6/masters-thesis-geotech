@@ -9931,7 +9931,7 @@ dbDisconnect(connection)
 
 * The total time that this particular city took to compute its BNA, including plots, overpass download, but without `GEOSTAT` data download on system, upload on file, and processing on database was **`r round(as.numeric(duration),2)` minutes**. Adding the `GEOSTAT` processing to the workflow adds around 5 minutes. Of course this is also subject to internet speed and computer performance. I run my analysis on an Asus F541U, Intel Core i7, 8GB RAM and 256 GB SSD, with Windows 10 OS.
 
-* What can be observed for the whole analysis is that the resulting BNA score is highly influenced by the fact that the job/employment data is not available. However, this was an attempt to reproduce the score as close as possible as PfB apply their methodology, just to explore its reproducibility. 
+* What can be observed for the whole analysis is that the resulting BNA score is highly influenced by the fact that the job/employment data was not included yet. However, this was an attempt to reproduce the score as close as possible as PfB apply their methodology, just to explore its reproducibility. 
 
 * My plan next is to exclude this variable from the BNA score computation, and perhaps include some other variables that would suit the European context better. 
 
