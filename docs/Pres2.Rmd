@@ -143,7 +143,7 @@ This means that other purpose trips would not be contemplated in the data.
 
 ## **Hypothesis 3:** "There is likely a relationship between connectivity and actual bicycling activity." (Lowry & Hadden, 2017)
 
-.left-column[<img src="figs/score.png" style="width: 80%" />]
+.left-column[<img src="figs/score.png" style="width: 70%" />]
 
 --
 
