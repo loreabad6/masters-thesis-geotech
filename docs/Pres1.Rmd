@@ -42,7 +42,7 @@ class: center, top
 
 Develop a methodology to optimize urban cycling networks' connectivity based on a quantitative index known as bike network analysis score.
 
-.center[<img src="bna.jpg" style="width: 50%" />]
+.center[<img src="figs/bna.jpg" style="width: 50%" />]
 
 ---
 background-image: url(https://images.unsplash.com/photo-1520431626067-a140ac2122f3?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3ea2f69f37c5648845e4c3ca88838f7a)
