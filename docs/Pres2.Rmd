@@ -90,11 +90,11 @@ Data source: [LSOA-flow commute data](https://wicid.ukdataservice.ac.uk/cider/wi
 ]
 
 .pull-left[
-<img src="cambridge_lts.PNG" style="width: 100%" />
+<img src="cambridge_lts.png" style="width: 100%" />
 ]
 
 .pull-right[
-<img src="cambridge_pct.PNG" style="width: 100%" />
+<img src="cambridge_pct.png" style="width: 100%" />
 ]
 
 ]
