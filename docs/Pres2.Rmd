@@ -74,7 +74,7 @@ class: center, top
 .center[<img src="figs/bna_schema.png" style="width: 90%" />]
 ---
 
-## **Hypothesis 1:** People bike more if there is a low stress network connecting their origin to their destination.
+## **Hypothesis 1:** More people bike if there is a low stress network connecting their origin to their destination.
 
 .left-column[<img src="figs/lts.png" style="width: 90%" />]
 
@@ -100,7 +100,7 @@ Data source: [LSOA-flow commute data](https://wicid.ukdataservice.ac.uk/cider/wi
 ]
 
 ---
-## **Hypothesis 2:** People bike more to the highly ranked destinations according to the BNA score
+## **Hypothesis 2:** More people bike to the highly ranked destinations according to the BNA score
 
 .left-column[
 <img src="figs/destinations.png" style="width: 90%" />
