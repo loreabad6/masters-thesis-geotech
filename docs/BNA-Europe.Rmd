@@ -11,7 +11,7 @@ output:
     code_folding: hide
     df_print: tibble
 ---
-[![GitHub](GitHub-Mark-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech) 
+[![GitHub](Figures/GitHub-Mark-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech) 
 
 *Check out my github repository for more content and updates on this project.*
 

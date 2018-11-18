@@ -47,7 +47,7 @@ The resulting low-stress network was very limited according to the classificatio
 
 The mentioned analysis results were mainly limited by the fact that the intersections could not be included within the classification criteria for traffic stress level. This was mainly due to the time constraint that we had to develop the project, and therefore would be important to be included on future work to provide a better understanding of the network strengths and weaknesses. 
 
-Additionally, the final report was submitted as a [short paper](https://drive.google.com/file/d/1Hf_sS92RgMJxF5Jo0FhBJdH9_C0sFtcw/view?usp=sharing) to the [Open Data for Open Cities](http://opendata4opencities.uji.es/agendalund/) Second edition of AGILE 2018 Workshop in Lund, Sweden. From the workshop participants suggestions a paper, currently in revision, was drafted, mentioning the following future work:
+Additionally, the final report was submitted as a short paper to the [Open Data for Open Cities](http://opendata4opencities.uji.es/agendalund/) Second edition of AGILE 2018 Workshop in Lund, Sweden. This lead to an article that can be accessed [here](https://www.mdpi.com/2078-2489/9/11/287). From the workshop participants suggestions a paper, currently in revision, was drafted, mentioning the following future work:
 
 * Analyze thoroughly the set up of street networks to include segments and intersections altogether, as the [PeopleForBikes approach](#PfB) considers, in an effort to translate the score for cities in Europe, considering the data limitations and possible replacements or, even further, modifications to the way the BNA score is calculated, given the available data. 
 
