@@ -373,7 +373,6 @@ minareadata <- function(min_area,country){
       library(dplyr)
       library(tidyr)
       nl_buurt <- st_read(file_buurt) %>% 
-        st_transform(crs = sa_crs) %>% 
         filter(WATER == "NEE") %>% 
         left_join(job_gem, by = c("GM_NAAM" = "Gemeente")) %>% 
         select(
@@ -407,6 +406,15 @@ minareadata <- function(min_area,country){
         )%>% 
         select(cell_id, bu_naam, population, jobs)
       
+      ## Transform data to match OSM geometry
+      proj_nl <- "+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.999908 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +towgs84=565.2369,50.0087,465.658,-0.406857330322398,0.350732676542563,-1.8703473836068,4.0812 +no_defs no_defs"
+      nl_buurt <- nl_buurt %>% 
+        st_transform(crs = proj_nl)  %>% 
+        st_transform(crs = sa_crs)
+      
+      #### Correction taken from this blog: 
+      #### http://www.qgis.nl/2011/12/05/epsg28992-of-rijksdriehoekstelsel-verschuiving/
+      
       # Load data into database
       dbWriteTable(
         conn = connection,
@@ -423,9 +431,10 @@ minareadata <- function(min_area,country){
       CREATE TABLE generated.sa_pop_grid AS
       SELECT l.cell_id, l.bu_naam, l.population, l.jobs, l.geometry
       FROM received.nl_buurt l, received.sa_boundary b
-      WHERE ST_Intersects(l.geometry,b.geometry);
-      ",
-      sa_crs = sa_crs
+      WHERE ST_Intersects(l.geometry, b.geometry)
+      AND (ST_Area(ST_Intersection(l.geometry, b.geometry)) > 500000 
+            OR ST_Contains(b.geometry, l.geometry));
+      "
     )
     
     dbSendQuery(connection,statement = extract)
