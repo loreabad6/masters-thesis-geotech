@@ -23,9 +23,7 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 ### Tasks
 
 - [X] Translate [BNA score developed by People for Bikes](https://bna.peopleforbikes.org/#/) scripts into R and SQL architecture.
-- [ ] Include data for population and jobs for European cities
-      - Population data available for Europe, UK and NL
-      - Job data available for UK
+- [X] Include data for population and jobs for European cities _(Population data available for Europe, UK and NL, job data available for UK)_
 - [ ] Include data sources to compute the score in the US
 - [ ] Validate the level of traffic stress classification
 - [ ] Validate the destination's weights
