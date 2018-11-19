@@ -378,7 +378,7 @@ minareadata <- function(min_area,country){
         left_join(job_gem, by = c("GM_NAAM" = "Gemeente")) %>% 
         select(
           cell_id = BU_CODE, 
-          BU_NAAM, 
+          bu_naam = BU_NAAM, 
           population = AANT_INW, 
           GM_NAAM, 
           companies = A_BED_A,
@@ -405,7 +405,7 @@ minareadata <- function(min_area,country){
             0
           )
         )%>% 
-        select(cell_id, BU_NAAM, population, jobs)
+        select(cell_id, bu_naam, population, jobs)
       
       # Load data into database
       dbWriteTable(
@@ -421,7 +421,7 @@ minareadata <- function(min_area,country){
       sql = "
       DROP TABLE IF EXISTS generated.sa_pop_grid;
       CREATE TABLE generated.sa_pop_grid AS
-      SELECT l.cell_id, l.BU_NAAM, l.population, l.jobs, l.geometry
+      SELECT l.cell_id, l.bu_naam, l.population, l.jobs, l.geometry
       FROM received.nl_buurt l, received.sa_boundary b
       WHERE ST_Intersects(l.geometry,b.geometry);
       ",
