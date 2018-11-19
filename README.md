@@ -20,6 +20,7 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
    - [York, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) _(with a surprisingly high score)_
    - [Oxford, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html)
    - [Venlo, NL](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)
+   - [Delft, NL](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)
 
 ### Tasks
 
