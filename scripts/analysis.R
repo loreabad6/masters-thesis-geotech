@@ -545,7 +545,7 @@ bna_display <- bna_display %>% mutate(
     score,
     "html", 
     color = ifelse(
-      score >= 54 & score < 100,
+      score >= 54 & score <= 100,
       "#009acd",
       ifelse(
         score < 54,
