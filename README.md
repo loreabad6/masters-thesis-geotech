@@ -13,9 +13,20 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 ### Products
 
- * _First product:_ [BNA score translated into R and SQL, to be applied in European cities](https://loreabad6.github.io/masters-thesis-geotech/BNA-Europe.nb.html).
+1. [BNA score translated into R and SQL, to be applied in European cities](https://loreabad6.github.io/masters-thesis-geotech/BNA-Europe.nb.html).
  
- * _Second product:_ A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in England, Wales and the Netherlands. The analysis has been run for some example cities:
-    + [Cambridge, UK]()
-    + [York, UK]()
-    + [Oxford, UK]()
+2. A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in England, Wales and the Netherlands. The analysis has been run for some example cities:
+   - [Cambridge, UK]()
+   - [York, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) _(with a surprisingly high score)_
+   - [Oxford, UK]()
+
+### Tasks
+
+- [X] Translate [BNA score developed by People for Bikes](https://bna.peopleforbikes.org/#/) scripts into R and SQL architecture.
+- [ ] Include data for population and jobs for European cities
+      - Population data available for Europe, UK and NL
+      - Job data available for UK
+- [ ] Include data sources to compute the score in the US
+- [ ] Validate the level of traffic stress classification
+- [ ] Validate the destination's weights
+- [ ] Find an alternative set of destinations that cover people's needs when they commute by bike to use in European cities
