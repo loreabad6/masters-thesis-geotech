@@ -367,7 +367,7 @@ minareadata <- function(min_area,country){
       job_gem <- read.csv(url_job, sep = '\t')
       
       # Call data into R
-      file_buurt <- file.path(exdir_nl,'Uitvoer_shape','buurt_2018.shp')
+      file_buurt <- file.path(exdir_nl,'Uitvoer_shape','buurt_2017.shp')
       
       library(sf)
       library(dplyr)
