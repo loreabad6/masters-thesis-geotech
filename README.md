@@ -19,15 +19,15 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 ##### How to use it?
 
-1. Create a database on its PostgreSQL. To test connection an empty table on the database called "test" should be created on the public schema. 
-    + Tip: Run FULL VACUUM/ANALYZE frequently to the database to improve performance.
-    + Follow the tips on [this presentation](https://thebuild.com/presentations/not-your-job.pdf) to increase performance of the database.
-2. Set path variables for `osm2pgsql` and `osm2pgrouting`.
+1. Create a database on its PostgreSQL. To test connection an empty table on the database called `test` should be created on the public schema
+    + Tip: Run `FULL VACUUM/ANALYZE` frequently on the database to improve performance
+    + Follow the tips on [this presentation](https://thebuild.com/presentations/not-your-job.pdf) to increase performance of the database
+2. Set path variables for `osm2pgsql` and `osm2pgrouting`
 3. Create a password file on `%APPDATA%/postgresql/pgpass.conf` with the format *hostname:port:database:username:password*
 4. Clone this repository 
 5. Edit the [R-Markdown report](report/BNA-Report-Template.Rmd) with your study area, and run the R-Notebook locally
-6. Wait for a while, keep in mind larger and more crowded areas take longer.
-7. Check out your results as an HTML file. 
+6. Wait for a while, keep in mind larger and more crowded areas take longer
+7. Check out your results as an HTML file 
 
 #### Example cities
 
