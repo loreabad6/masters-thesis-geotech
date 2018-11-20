@@ -29,7 +29,7 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 6. Wait for a while, keep in mind larger and more crowded areas take longer
 7. Check out your results as an HTML file 
 
-#### Example cities
+##### Example cities
 
 | UK | Netherlands |
 | ------------- | ------------- |
