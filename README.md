@@ -48,11 +48,17 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 The BNA score bases its methodology on [OSM](https://www.openstreetmap.org/) data, however job and population data is accessed from other open data sources. Particularly for this project, this datasets were used:
 
-| Region                 | Population    | Jobs          |
-| ---------------------  | ------------- | ------------- |
-| Europe                 | Population grid per squared kilometer for 2011 from [GEOSTAT - EUROSTAT](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/population-distribution-demography/geostat)                                                                      | No data available for the whole continent with high spatial resolution. |
-| UK (England and Wales) | Population estimates for mid-2017 at LSOA and MSOA level from the [Office of National Statistics - ONS](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates)                                                                                  | Flow commute data for the 2011 Census at LSOA and MSOA level from the [Office of National Statistics - ONS](https://wicid.ukdataservice.ac.uk/cider/wicid/downloads.php?guest=1), where the total number of trips per super-output area where aggregated. |
-| The Netherlands       | District and neighborhood map with associated key figures for 2017 from the [Centraal Bureau voor de Statistiek - CBS ](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische%20data/wijk-en-buurtkaart-2017)                                                              | Jobs per municipality from [	LISA (National Information System for Workplaces) dataset](https://www.lisa.nl/data/gratis-data/overzicht-lisa-data-per-gemeente). To estimate jobs at neighborhood level a spatial interpolation was made with the number of jobs in the whole municipality hafly weighted by the fraction of the neighborhood area, and hafly weighted by the fraction of companies in the neighborhood, taken from the CBS data. This approach needs to be validated, however it is one way to approximate it, given that LISA data at this aggregation level has to be bought and is not open data. |
+- Europe:
+  - Population grid per squared kilometer for 2011 from [GEOSTAT - EUROSTAT](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/population-distribution-demography/geostat)
+  - No data available for the whole continent with high spatial resolution
+  
+- UK (England and Wales)
+  - Population estimates for mid-2017 at LSOA and MSOA level from the [Office of National Statistics - ONS](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates) 
+  - Flow commute data (travel to work) for the 2011 Census at LSOA and MSOA level from the [Office of National Statistics - ONS](https://wicid.ukdataservice.ac.uk/cider/wicid/downloads.php?guest=1), where the total number of trips per destination super-output area where aggregated, and assumed as the total number of jobs in the area.
+
+- The Netherlands
+  - District and neighborhood map with associated key figures like population for 2017 from the [Centraal Bureau voor de Statistiek - CBS ](https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische%20data/wijk-en-buurtkaart-2017) 
+  - Jobs per municipality from [	LISA (National Information System for Workplaces) dataset](https://www.lisa.nl/data/gratis-data/overzicht-lisa-data-per-gemeente). To estimate jobs at neighborhood level a spatial interpolation was made with the number of jobs in the whole municipality hafly weighted by the fraction of the neighborhood area, and hafly weighted by the fraction of companies in the neighborhood, taken from the CBS data. This approach needs to be validated, however it is one way to approximate it, given that LISA data at this aggregation level has to be bought and is not open data
 
 <a name="example"></a>
 ##### Example cities
