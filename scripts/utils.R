@@ -113,7 +113,7 @@ sa_download <- function(conn){
   ifelse(
     file.exists(file.path(cd,'temp','overpass.osm')),
     "OMS data successfully downloaded!",
-    "OSM data was not downloaded, please try again or download manually."
+    stop("OSM data was not downloaded, please try again or download manually.")
   )
   
 }

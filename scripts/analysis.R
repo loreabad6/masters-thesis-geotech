@@ -65,6 +65,7 @@ ifelse(
 
 # DOWNLOAD THE DATA FROM OSM WITH OVERPASS API
 sa_download(conn = connection)
+osm_size <- file.size(file.path(getwd(),'temp','overpass.osm'))/1000000
 
 # CREATE A NEW TEMPORAL DIRECTORY TO DOWNLOAD INFO
 cd <- getwd()
@@ -552,7 +553,8 @@ bna_display <- bna_display %>% mutate(
         "#ff3030",
         "#666666"
       )
-    )
+    ),
+    popover = human_explanation
   )
 )
 

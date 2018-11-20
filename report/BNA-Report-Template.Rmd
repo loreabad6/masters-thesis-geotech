@@ -49,9 +49,9 @@ subdivisions = 4
 * You calculated the BNA score for 
 <span style="color:#BB616D">**`r sa_name`, `r country`**</span> 
 within a biking distance of 
-<span style="color:#BB616D">**`r biking_distance/1000`**</span> km.
+<span style="color:#BB616D">**`r biking_distance/1000`**</span> km. 
 
-* The analysis took **`r round(as.numeric(duration),2)` minutes** to run.
+`r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", osm_size, "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
 
 * The analysis corresponds to the 
 <span style="color:#BB616D">**`r ifelse(area_type == "ttwa","Travel to Work Area","OSM boundary area")`**</span> (red) based on 

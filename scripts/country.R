@@ -333,7 +333,8 @@ minareadata <- function(min_area,country){
       SELECT l.cell_id, l.lsoa11nm, l.population, l.jobs, l.geometry
       FROM received.lsoa l, received.sa_boundary b
       WHERE ST_Intersects(l.geometry,b.geometry)
-      AND ST_Area(ST_Intersection(l.geometry, b.geometry))>100000;
+      AND (ST_Area(ST_Intersection(l.geometry, b.geometry)) > 100000
+            OR ST_Contains(b.geometry, l.geometry));
       ",
       sa_crs = sa_crs
     )
