@@ -228,8 +228,9 @@ minareadata <- function(min_area,country){
       CREATE TABLE generated.sa_pop_grid AS
       SELECT m.msoa11cd, m.msoa11nm, m.population, m.jobs, m.geometry
       FROM received.msoa m, received.sa_boundary b
-      WHERE ST_Intersects(m.geometry,b.geometry)
-      AND ST_Area(ST_Intersection(m.geometry, b.geometry))>1000;
+      AND (ST_Area(ST_Intersection(l.geometry, b.geometry))/
+            ST_Area(l.geometry) > 0.7
+          OR ST_Contains(b.geometry, l.geometry));
       ",
       sa_crs = sa_crs
     )
@@ -333,7 +334,8 @@ minareadata <- function(min_area,country){
       SELECT l.cell_id, l.lsoa11nm, l.population, l.jobs, l.geometry
       FROM received.lsoa l, received.sa_boundary b
       WHERE ST_Intersects(l.geometry,b.geometry)
-      AND (ST_Area(ST_Intersection(l.geometry, b.geometry)) > 100000
+      AND (ST_Area(ST_Intersection(l.geometry, b.geometry))/
+            ST_Area(l.geometry) > 0.7
             OR ST_Contains(b.geometry, l.geometry));
       ",
       sa_crs = sa_crs
@@ -433,7 +435,8 @@ minareadata <- function(min_area,country){
       SELECT l.cell_id, l.bu_naam, l.population, l.jobs, l.geometry
       FROM received.nl_buurt l, received.sa_boundary b
       WHERE ST_Intersects(l.geometry, b.geometry)
-      AND (ST_Area(ST_Intersection(l.geometry, b.geometry)) > 500000 
+      AND (ST_Area(ST_Intersection(l.geometry, b.geometry))/
+            ST_Area(l.geometry) > 0.7
             OR ST_Contains(b.geometry, l.geometry));
       "
     )
