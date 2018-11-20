@@ -51,11 +51,14 @@ subdivisions = 4
 within a biking distance of 
 <span style="color:#BB616D">**`r biking_distance/1000`**</span> km. 
 
-`r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", osm_size, "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
+`r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", round(osm_size,2), "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
 
 * The analysis corresponds to the 
 <span style="color:#BB616D">**`r ifelse(area_type == "ttwa","Travel to Work Area","OSM boundary area")`**</span> (red) based on 
 <span style="color:#BB616D">**`r ifelse(min_area == "msoa","its Middle Layer Superoutput Areas (MSOA)",ifelse(min_area == "lsoa","its Lower Layer Superoutput Areas (LSOA)",ifelse(min_area == "cb","its census blocks",ifelse(min_area == "buurt","its neighborhood areas","a subdivided population grid from GEOSTAT"))))`**</span> (green).
+
+```{r connection, include=FALSE, cache = FALSE}
+```
 
 ```{r area, include=FALSE, cache = FALSE}
 ```
@@ -174,85 +177,3 @@ int_map
 
 ```{r duration, include = FALSE, cache = FALSE}
 ```
-
-## Setup info
-
-To run this analysis, the user should:
-
-1. Create a database on its PostgreSQL. To test connection an empty table on the database called "test" should be created on the public schema. 
-    + Tip: Run FULL VACUUM/ANALYZE frequently to the database to improve performance.
-    + Follow the tips on [this presentation](https://thebuild.com/presentations/not-your-job.pdf) to increase performance of the database.
-
-2. Set path variables for `osm2pgsql` and `osm2pgrouting`.
-
-3. Create a password file on `%APPDATA%/postgresql/pgpass.conf` with the format *hostname:port:database:username:password*
-
-
-## Data sources
-
-```{r, echo = FALSE}
-library(kableExtra)
-tbl <- data.frame(
-  Region = cell_spec(
-    c(
-      "US",
-      "Europe",
-      "UK",
-      "The Netherlands"
-    )
-  ),
-  source_pop = cell_spec(
-    c(
-      "",
-      "GEOSTAT - EUROSTAT",
-      "Office of National Statistics - UK",
-      "CBS (Centraal Bureau voor de Statistiek) - NL"
-    ),
-    link = c(
-      "",
-      "https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/population-distribution-demography/geostat",
-      "https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates",
-      "https://www.cbs.nl/nl-nl/dossier/nederland-regionaal/geografische%20data/wijk-en-buurtkaart-2017"
-    )
-  ),
-  desc_pop = cell_spec(
-    c(
-      "Not added yet.",
-      "Population grid per squared kilometer for 2011.",
-      "Population estimates for mid-2017 at LSOA and MSOA level.",
-      "District and neighborhood map with associated key figures for 2017."
-    )
-  ),
-  source_jobs = cell_spec(
-    c(
-      "",
-      "",
-      "Office of National Statistics - UK",
-      "LISA (National Information System for Workplaces) dataset"
-    ), 
-    link = c(
-      "",
-      "",
-      "https://wicid.ukdataservice.ac.uk/cider/wicid/downloads.php?guest=1",
-      "https://www.lisa.nl/data/gratis-data/overzicht-lisa-data-per-gemeente"
-    )
-  ),
-  desc_jobs = cell_spec(
-    c(
-      "Not added yet.",
-      "No data available for the whole continent with high spatial resolution.",
-      "Flow commute data for the 2011 Census at LSOA and MSOA level, where the total number of trips per super-output area where aggregated.",
-      "Jobs per municipality. To estimate jobs at neighborhood level an weighted estimation was made with the number of jobs in the whole municipality hafly weighted by the fraction of the neighborhood area, and hafly weighted by the fraction of companies in the neighborhood. This approach needs to be validated, however it is one way to approximate it, given that LISA data at this aggregation level has to be bought and is not open data."
-    )
-  )
-)
-
-names(tbl) <- c("Region", "Source", "Description", "Source", "Description")
-
-kable(tbl, align = "c", escape = FALSE) %>%
-  kable_styling("striped", "bordered", font_size = 10, full_width = T) %>% 
-  add_header_above(c(" ", "Population" = 2, "Jobs" = 2)) %>% 
-  column_spec(3, width_max = "10cm") %>% 
-  column_spec(5, width_max = "10cm")
-```
-
