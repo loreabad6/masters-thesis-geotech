@@ -20,12 +20,12 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 | UK | Netherlands |
 | ------------- | ------------- |
 | [Cambridge](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html) | [Venlo](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)  |
-| [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) _(with a surprisingly high score)_  | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)  |
+| [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)  |
 | [Oxford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html) | [Groningen](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Groningen.nb.html)  |
 | [Cheltenham](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cheltenham.nb.html) |  |
 | [Chesterfield](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chesterfield.nb.html)  |  |
 | [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html) |   |
-
+| [Maidstone](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html) |   |
 ### Tasks
 
 - [X] Translate [BNA score developed by People for Bikes](https://bna.peopleforbikes.org/#/) scripts into R and SQL architecture.
