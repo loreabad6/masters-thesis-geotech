@@ -26,11 +26,25 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 | [Chesterfield](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chesterfield.nb.html)  |  |
 | [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html) |   |
 | [Maidstone](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html) |   |
+
+#### How to use it?
+
+1. Create a database on its PostgreSQL. To test connection an empty table on the database called "test" should be created on the public schema. 
+    + Tip: Run FULL VACUUM/ANALYZE frequently to the database to improve performance.
+    + Follow the tips on [this presentation](https://thebuild.com/presentations/not-your-job.pdf) to increase performance of the database.
+2. Set path variables for `osm2pgsql` and `osm2pgrouting`.
+3. Create a password file on `%APPDATA%/postgresql/pgpass.conf` with the format *hostname:port:database:username:password*
+4. Clone this repository 
+5. Edit the [R-Markdown report](report/BNA-Report-Template.Rmd) with your study area, and run the R-Notebook locally
+6. Wait for a while, keep in mind larger and more crowded areas take longer.
+7. Check out your results as an HTML file. 
+
 ### Tasks
 
 - [X] Translate [BNA score developed by People for Bikes](https://bna.peopleforbikes.org/#/) scripts into R and SQL architecture.
 - [X] Include data for population and jobs for European cities _(Population data available for Europe, UK and NL, job data available for UK)_
-- [ ] Include data sources to compute the score in the US
+- [ ] \(Optional) Include data sources to compute the score in the US
+- [ ] \(Optional) Create a shiny app to show the computed results so far
 - [ ] Validate the level of traffic stress classification
 - [ ] Validate the destination's weights
 - [ ] Find an alternative set of destinations that cover people's needs when they commute by bike to use in European cities
