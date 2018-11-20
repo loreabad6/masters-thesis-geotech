@@ -1,4 +1,4 @@
-## ---- area --------------
+## ---- connection --------------
 library(DBI)
 library(RPostgreSQL)
 library(sqldf)
@@ -42,6 +42,15 @@ dbSendQuery(
   CREATE SCHEMA IF NOT EXISTS results;
   "
 )
+
+## ---- area --------------
+library(DBI)
+library(RPostgreSQL)
+library(sqldf)
+library(readr)
+library(utils)
+library(sf)
+library(dplyr)
 
 # Obtain boundary for analysis.
 ifelse(
