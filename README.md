@@ -15,14 +15,16 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 1. [BNA score translated into R and SQL, to be applied in European cities](https://loreabad6.github.io/masters-thesis-geotech/BNA-Europe.nb.html).
  
-2. A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in England, Wales and the Netherlands. The analysis has been run for some example cities:
-   - [Cambridge, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html)
-   - [York, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) _(with a surprisingly high score)_
-   - [Oxford, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html)
-   - [Maidstone, UK](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html)
-   - [Venlo, NL](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)
-   - [Delft, NL](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)
-   - [Groningen, NL](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Groningen.nb.html)
+2. A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in the UK (England and Wales) and the Netherlands. The analysis has been run for some example cities:
+
+| UK | Netherlands |
+| ------------- | ------------- |
+| [Cambridge](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html) | [Venlo](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)  |
+| [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) _(with a surprisingly high score)_  | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)  |
+| [Oxford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html) | [Groningen](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Groningen.nb.html)  |
+| [Cheltenham](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cheltenham.nb.html) |  |
+| [Chesterfield](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chesterfield.nb.html)  |  |
+| [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html) |   |
 
 ### Tasks
 
