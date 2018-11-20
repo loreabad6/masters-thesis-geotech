@@ -15,7 +15,7 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 1. [BNA score translated into R and SQL, to be applied in European cities](https://loreabad6.github.io/masters-thesis-geotech/BNA-Europe.nb.html).
  
-2. A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in the UK (England and Wales) and the Netherlands. 
+2. A [series of scripts](scripts/) that come together into an [R-Markdown report](report/BNA-Report-Template.Rmd) to calculate the BNA score for cities in the UK (England and Wales) and The Netherlands. 
 
 ##### How to use it?
 
@@ -31,7 +31,7 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 
 ##### Example cities
 
-| UK | Netherlands |
+| England | The Netherlands |
 | ------------- | ------------- |
 | [Cambridge](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html) | [Venlo](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)  |
 | [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)  |
