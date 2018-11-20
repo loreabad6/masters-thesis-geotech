@@ -74,7 +74,9 @@ ifelse(
 
 # DOWNLOAD THE DATA FROM OSM WITH OVERPASS API
 sa_download(conn = connection)
-osm_size <- file.size(file.path(getwd(),'temp','overpass.osm'))/1000000
+
+osm_file <- file.path(getwd(),'temp','overpass.osm')
+osm_size <- file.size(osm_file)/1000000
 
 # CREATE A NEW TEMPORAL DIRECTORY TO DOWNLOAD INFO
 cd <- getwd()
@@ -107,17 +109,34 @@ if(
 
 # Load data to DB
 system(
-  command = "osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S E:/GeoTech/Thesis/Thesis_R_Project/temp/pfb.style E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm --cache 600",
+  command = paste(
+    "osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S",
+    pfbstyle_file,
+    osm_file,
+    "--cache 600"
+  ),
   show.output.on.console = TRUE
 )
 
 system(
-  command = "osm2pgrouting -f E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm -h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf E:/GeoTech/Thesis/Thesis_R_Project/temp/mapconfig.xml --clean",
+  command = paste(
+    "osm2pgrouting -f",
+    osm_file,
+    "-h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf",
+    mapconfig_file,
+    "--clean"
+  ),
   show.output.on.console = TRUE
 )
 
 system(
-  command = "osm2pgrouting -f E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm -h localhost  -d bna_europe --username postgres --schema received --prefix sa_bike_ --conf E:/GeoTech/Thesis/Thesis_R_Project/temp/mapconfig_for_bicycles.xml --clean",
+  command = paste(
+    "osm2pgrouting -f",
+    osm_file,
+    "-h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf",
+    mapconfigbikes_file,
+    "--clean"
+  ),
   show.output.on.console = TRUE
 )
 
