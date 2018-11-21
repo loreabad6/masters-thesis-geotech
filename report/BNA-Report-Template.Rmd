@@ -51,7 +51,7 @@ subdivisions = 4
 within a biking distance of 
 <span style="color:#BB616D">**`r biking_distance/1000`**</span> km. 
 
-`r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", round(osm_size,2), "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
+* `r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", round(osm_size,2), "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
 
 * The analysis corresponds to the 
 <span style="color:#BB616D">**`r ifelse(area_type == "ttwa","Travel to Work Area","OSM boundary area")`**</span> (red) based on 
@@ -61,6 +61,15 @@ within a biking distance of
 ```
 
 ```{r area, include=FALSE, cache = FALSE}
+```
+
+```{r verify_area, echo = FALSE}
+library(tmap)
+tmap_mode("view")
+qtm(boundary, borders = "red", fill = NULL, basemaps = "OpenStreetMap")
+```
+
+```{fetch, include = FALSE, cache = FALSE}
 ```
 
 ```{r network, include = FALSE, cache = FALSE}
