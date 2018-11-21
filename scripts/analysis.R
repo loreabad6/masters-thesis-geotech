@@ -65,8 +65,25 @@ ifelse(
   )
 )
 
+library(tmap)
+tmap_mode("view")
+qtm(boundary)
+
 # DOWNLOAD THE DATA FROM OSM WITH OVERPASS API
-sa_download(conn = connection)
+reply <- menu(
+  choices = c("Yes","No"), 
+  title = "Check out the viewer tab or the chunk output above. Is this the study area you want to use?"
+)
+
+ifelse(
+  reply == 1,
+  sa_download(conn = connection),
+  ifelse(
+    reply == 2,
+    stop("Make your study are more specific so that the Nominatum finds your place."),
+    "You did not verify your study area correctly"
+  )
+)
 
 osm_file <- file.path(getwd(),'temp','overpass.osm')
 osm_size <- file.size(osm_file)/1000000
@@ -465,8 +482,8 @@ bna_score_table <- dbGetQuery(connection,statement = "SELECT * FROM generated.sa
 ## Ways with stress network 
 sqldf(
   paste0(
-    "DROP TABLE IF EXISTS results.",sa_name,"_stress_network;
-    CREATE TABLE results.",sa_name,"_stress_network AS
+    "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_stress_network;
+    CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_stress_network AS
     SELECT ft_seg_stress, ft_int_stress, tf_seg_stress, tf_int_stress, geom 
     FROM received.sa_ways;"
   ),
@@ -476,8 +493,8 @@ sqldf(
 ## Connected population grid 
 sqldf(
   paste0(
-    "DROP TABLE IF EXISTS results.",sa_name,"_connected_pop_grid;
-    CREATE TABLE results.",sa_name,"_connected_pop_grid AS
+    "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_connected_pop_grid;
+    CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_connected_pop_grid AS
     SELECT * 
     FROM generated.sa_connected_pop_grid;"
   ),
@@ -487,8 +504,8 @@ sqldf(
 ## Population grid with BNA score
 sqldf(
   paste0(
-    "DROP TABLE IF EXISTS results.",sa_name,"_pop_grid;
-    CREATE TABLE results.",sa_name,"_pop_grid AS
+    "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_pop_grid;
+    CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_pop_grid AS
       SELECT * 
       FROM generated.sa_pop_grid;"
   ),
@@ -498,8 +515,8 @@ sqldf(
 ## Overall scores
 sqldf(
   paste0(
-    "DROP TABLE IF EXISTS results.",sa_name,"_overall_scores;
-    CREATE TABLE results.",sa_name,"_overall_scores AS
+    "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_overall_scores;
+    CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_overall_scores AS
       SELECT * 
       FROM generated.sa_overall_scores;"
   ),
