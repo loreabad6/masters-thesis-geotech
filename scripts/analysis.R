@@ -44,13 +44,6 @@ dbSendQuery(
 )
 
 ## ---- area --------------
-library(DBI)
-library(RPostgreSQL)
-library(sqldf)
-library(readr)
-library(utils)
-library(sf)
-library(dplyr)
 
 # Obtain boundary for analysis.
 ifelse(
@@ -133,7 +126,7 @@ system(
   command = paste(
     "osm2pgrouting -f",
     osm_file,
-    "-h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf",
+    "-h localhost -d bna_europe --username postgres --schema received --prefix sa_bike_ --conf",
     mapconfigbikes_file,
     "--clean"
   ),
@@ -149,13 +142,6 @@ if(
 rm(pfbstyle_file,mapconfig_file,mapconfigbikes_file)
 
 ## ---- network ------------
-library(DBI)
-library(RPostgreSQL)
-library(sqldf)
-library(readr)
-library(utils)
-library(sf)
-library(dplyr)
 
 # Call stress functions
 source("scripts/stress.R")
