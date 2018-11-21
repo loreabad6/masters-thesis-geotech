@@ -73,6 +73,7 @@ The BNA score bases its methodology on [OSM](https://www.openstreetmap.org/) dat
 | [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html) |   | |
 | [Maidstone](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html) |   | |
 | [Lincoln](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Lincoln.nb.html) | | |
+| [Chelmsford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chelmsford.nb.html) | | |
 
 <a name="tasks"></a>
 ### Tasks
