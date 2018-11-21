@@ -63,17 +63,18 @@ The BNA score bases its methodology on [OSM](https://www.openstreetmap.org/) dat
 <a name="example"></a>
 ##### Example cities
 
-| England | The Netherlands | Wales |
-| ------------- | ------------- | ------------- |
-| [Cambridge](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html) | [Venlo](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)  | [Bridgend](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Brdigend.nb.html) |
-| [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html) | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)  | |
-| [Oxford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html) | [Groningen](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Groningen.nb.html)  | |
-| [Cheltenham](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cheltenham.nb.html) |  | |
-| [Chesterfield](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chesterfield.nb.html)  |  | |
-| [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html) |   | |
-| [Maidstone](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html) |   | |
-| [Lincoln](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Lincoln.nb.html) | | |
-| [Chelmsford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chelmsford.nb.html) | | |
+| England       | The Netherlands | Wales         |
+| ------------- | --------------- | ------------- |
+| [Cambridge](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cambridge.nb.html)                                                           | [Venlo](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Venlo.nb.html)                                                                     | [Bridgend](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Brdigend.nb.html) |
+| [York](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-York.nb.html)                                                                     | [Delft](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Delft.nb.html)                                                                     | [Newport](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Newport.nb.html) |
+| [Oxford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Oxford.nb.html)                                                                 | [Groningen](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Groningen.nb.html)                                                             | |
+| [Cheltenham](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Cheltenham.nb.html)                                                         | [Breda](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Breda.nb.html)                                                                     | |
+| [Chesterfield](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chesterfield.nb.html)                                                     |                                                                                                                                                         | |
+| [Worcester](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Worcester.nb.html)                                                           |                                                                                                                                                         | |
+| [Maidstone](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Maidstone.nb.html)                                                           |                                                                                                                                                         | |
+| [Lincoln](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Lincoln.nb.html)                                                               |                                                                                                                                                         | |
+| [Chelmsford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Chelmsford.nb.html)                                                         |                                                                                                                                                         | |
+| [Bedford](https://loreabad6.github.io/masters-thesis-geotech/BNA-Report-Bedford.nb.html)                                                               |                                                                                                                                                         | |
 
 <a name="tasks"></a>
 ### Tasks
