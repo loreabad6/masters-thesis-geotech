@@ -27,7 +27,7 @@ db_pass = rstudioapi::askForPassword("Database password")
 
 ```{r variables, warning = FALSE, include = FALSE}
 ## Basic variables to set 
-country = "UK" # Possible options: UK, US, Belgium, Netherlands, NA
+country = "UK" # Possible options: UK, US, Netherlands, NA
 sa_name = "Corby" # study area
 sa_crs = 3857 # crs
 biking_distance = 3000 ## in meters
@@ -51,7 +51,7 @@ subdivisions = 4
 within a biking distance of 
 <span style="color:#BB616D">**`r biking_distance/1000`**</span> km. 
 
-* `r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", round(osm_size,2), "MB and the"),"The")` analysis took **`r round(as.numeric(duration),2)` minutes** to run.
+* `r ifelse(area_type == "osm",paste("The size of the osm data for your study area is", round(osm_size,2), "MB and the"),"The")` analysis took **`r paste(round(as.numeric(duration),2), units(duration))`** to run.
 
 * The analysis corresponds to the 
 <span style="color:#BB616D">**`r ifelse(area_type == "ttwa","Travel to Work Area","OSM boundary area")`**</span> (red) based on 
@@ -66,7 +66,7 @@ within a biking distance of
 ```{r verify_area, echo = FALSE}
 library(tmap)
 tmap_mode("view")
-qtm(boundary, borders = "red", fill = NULL, basemaps = "OpenStreetMap")
+qtm(boundary, borders = "red", borders.lwd = 3, fill = NULL, basemaps = "OpenStreetMap")
 ```
 
 ```{fetch, include = FALSE, cache = FALSE}
@@ -117,7 +117,7 @@ library(sf)
 bna_score <- st_read(
   dsn = connection,
   layer = c("generated","sa_pop_grid")
-)
+) %>% mutate(bna_popup = round(overall_score),2)
 
 stress_network <- st_read(
   dsn = connection,
@@ -158,7 +158,8 @@ int_map <-
        title = "BNA score",
        border.col = NULL,
        colorNA = NULL,
-       showNA = FALSE
+       showNA = FALSE, 
+       id = "bna_popup"
       ) +
      tmap::tm_shape(stress_network) +
      tmap::tm_lines(
