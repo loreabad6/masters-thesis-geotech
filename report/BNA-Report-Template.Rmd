@@ -69,7 +69,7 @@ tmap_mode("view")
 qtm(boundary, borders = "red", borders.lwd = 3, fill = NULL, basemaps = "OpenStreetMap")
 ```
 
-```{fetch, include = FALSE, cache = FALSE}
+```{r fetch, include = FALSE, cache = FALSE}
 ```
 
 ```{r network, include = FALSE, cache = FALSE}
