@@ -250,7 +250,7 @@ p2 <- ggplot() +
   scale_color_manual(
     values = c("firebrick1", "deepskyblue3")
   ) +
-  ylab("Bike share") + xlab("") +
+  ylab("Bike trip (log)") + xlab("") +
   theme_pubclean() +
   theme(
     legend.key=element_blank(), 
@@ -296,7 +296,7 @@ gg2 <- ggplot(nl_lts_dl, aes(stress_level, log(bike_trips))) +
     lwd = 3,
     outlier.colour = NA
   ) +
-  ylab("Bike trip logarithm") + xlab("Stress level") +
+  ylab("Bike trip (log)") + xlab("Stress level") +
   theme_pubclean() +
   theme(legend.position = "none")
 
