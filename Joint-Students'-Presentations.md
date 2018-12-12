@@ -6,7 +6,7 @@ Every month I present advancements of my thesis, regarding these topics:
 
 * [Experimental Setup or Architecture](https://loreabad6.github.io/masters-thesis-geotech/Pres2.html) - November 14th, 2018
 
-* Prototyping - December 12th, 2018
+* [Prototyping](https://loreabad6.github.io/masters-thesis-geotech/Pres3.html) - December 12th, 2018
 
 * Results of experiments or implementation - January 9th, 2019
 
