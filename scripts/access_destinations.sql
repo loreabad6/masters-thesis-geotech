@@ -62,6 +62,9 @@ SET     colleges_score =    CASE
 
 -- set population shed for each college in the neighborhood
 UPDATE  destinations.sa_colleges
+SET     dest_type = 'college';
+
+UPDATE  destinations.sa_colleges
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -152,6 +155,9 @@ SET     community_centers_score =   CASE
                                     END;
 
 -- set population shed for each community center in the neighborhood
+UPDATE  destinations.sa_community_centers
+SET     dest_type = 'community_center';
+
 UPDATE  destinations.sa_community_centers
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
@@ -244,6 +250,9 @@ SET     dentists_score =    CASE
 
 -- set population shed for each dentists destination in the neighborhood
 UPDATE  destinations.sa_dentists
+SET     dest_type = 'dentist';
+
+UPDATE  destinations.sa_dentists
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -334,6 +343,9 @@ SET     doctors_score = CASE
                         END;
 
 -- set population shed for each doctors destination in the neighborhood
+UPDATE  destinations.sa_doctors
+SET     dest_type = 'doctor';
+
 UPDATE  destinations.sa_doctors
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
@@ -426,6 +438,9 @@ SET     hospitals_score =   CASE
 
 -- set population shed for each hospitals destination in the neighborhood
 UPDATE  destinations.sa_hospitals
+SET     dest_type = 'hospital';
+
+UPDATE  destinations.sa_hospitals
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -517,6 +532,9 @@ SET     parks_score =   CASE
 
 -- set population shed for each park in the neighborhood
 UPDATE  destinations.sa_parks
+SET     dest_type = 'park';
+
+UPDATE  destinations.sa_parks
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -607,6 +625,9 @@ SET     pharmacies_score =  CASE
                             END;
 
 -- set population shed for each pharmacies destination in the neighborhood
+UPDATE  destinations.sa_pharmacies
+SET     dest_type = 'pharmacy';
+
 UPDATE  destinations.sa_pharmacies
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
@@ -700,6 +721,9 @@ SET     retail_score =  CASE
 
 -- set population shed for each retail destination in the neighborhood
 UPDATE  destinations.sa_retail
+SET     dest_type = 'retail';
+
+UPDATE  destinations.sa_retail
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -791,6 +815,9 @@ SET     schools_score = CASE
                         END;
 
 -- set population shed for each school in the neighborhood
+UPDATE  destinations.sa_schools
+SET     dest_type = 'school';
+
 UPDATE  destinations.sa_schools
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
@@ -884,6 +911,9 @@ SET     social_services_score = CASE
 
 -- set population shed for each social service destination in the neighborhood
 UPDATE  destinations.sa_social_services
+SET     dest_type = 'social_services';
+
+UPDATE  destinations.sa_social_services
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -974,6 +1004,9 @@ SET     supermarkets_score =    CASE
                                 END;
 
 -- set population shed for each supermarket in the neighborhood
+UPDATE  destinations.sa_supermarkets
+SET     dest_type = 'supermarket';
+
 UPDATE  destinations.sa_supermarkets
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
@@ -1134,6 +1167,9 @@ SET     transit_score =   CASE
 
 -- set population shed for each park in the neighborhood
 UPDATE  destinations.sa_transit
+SET     dest_type = 'transit';
+
+UPDATE  destinations.sa_transit
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)
             FROM    generated.sa_pop_grid cb,
@@ -1224,6 +1260,9 @@ SET     universities_score =    CASE
                                 END;
 
 -- set population shed for each university in the neighborhood
+UPDATE  destinations.sa_universities
+SET     dest_type = 'university';
+
 UPDATE  destinations.sa_universities
 SET     pop_high_stress = (
             SELECT  SUM(cb.population)

@@ -65,9 +65,7 @@ ifelse(
   )
 )
 
-library(tmap)
-tmap_mode("view")
-qtm(boundary)
+## ----fetch-----
 
 # DOWNLOAD THE DATA FROM OSM WITH OVERPASS API
 reply <- menu(
@@ -488,7 +486,7 @@ sqldf(
     FROM received.sa_ways;"
   ),
   connection = connection
-  )
+)
 
 ## Connected population grid 
 sqldf(
@@ -508,6 +506,41 @@ sqldf(
     CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_pop_grid AS
       SELECT * 
       FROM generated.sa_pop_grid;"
+  ),
+  connection = connection
+)
+
+## Destinations
+
+sqldf(
+  paste0(
+    "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_destinations;
+    CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_destinations AS
+    (SELECT * FROM destinations.sa_colleges 
+    UNION 
+    SELECT * FROM destinations.sa_community_centers
+    UNION 
+    SELECT * FROM destinations.sa_dentists 
+    UNION 
+    SELECT * FROM destinations.sa_doctors 
+    UNION 
+    SELECT * FROM destinations.sa_hospitals 
+    UNION 
+    SELECT * FROM destinations.sa_parks 
+    UNION 
+    SELECT * FROM destinations.sa_pharmacies 
+    UNION 
+    SELECT * FROM destinations.sa_retail 
+    UNION 
+    SELECT * FROM destinations.sa_schools 
+    UNION 
+    SELECT * FROM destinations.sa_social_services 
+    UNION 
+    SELECT * FROM destinations.sa_supermarkets 
+    UNION 
+    SELECT * FROM destinations.sa_transit 
+    UNION 
+    SELECT * FROM destinations.sa_universities);"
   ),
   connection = connection
 )
@@ -616,3 +649,4 @@ duration <- end - start
 
 ## Disconnect from DB
 dbDisconnect(connection)
+rm(connection)

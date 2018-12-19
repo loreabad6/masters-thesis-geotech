@@ -8,10 +8,11 @@ CREATE TABLE destinations.sa_colleges (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    college_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -34,7 +35,7 @@ ANALYZE destinations.sa_colleges (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_colleges (
-    osm_id, college_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -73,10 +74,11 @@ CREATE TABLE destinations.sa_community_centers (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    center_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -99,7 +101,7 @@ ANALYZE destinations.sa_community_centers (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_community_centers (
-    osm_id, center_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -138,10 +140,11 @@ CREATE TABLE destinations.sa_dentists (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    dentists_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -164,7 +167,7 @@ ANALYZE destinations.sa_dentists (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_dentists (
-    osm_id, dentists_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -203,10 +206,11 @@ CREATE TABLE destinations.sa_doctors (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    doctors_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -229,7 +233,7 @@ ANALYZE destinations.sa_doctors (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_doctors (
-    osm_id, doctors_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -269,10 +273,11 @@ CREATE TABLE destinations.sa_hospitals (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    hospital_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -295,7 +300,7 @@ ANALYZE destinations.sa_hospitals (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_hospitals (
-    osm_id, hospital_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -334,10 +339,11 @@ CREATE TABLE destinations.sa_parks (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    park_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -363,7 +369,7 @@ ANALYZE destinations.sa_parks (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_parks (
-    osm_id, park_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -407,10 +413,11 @@ CREATE TABLE destinations.sa_pharmacies (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    pharmacy_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -433,7 +440,7 @@ ANALYZE destinations.sa_pharmacies (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_pharmacies (
-    osm_id, pharmacy_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -471,9 +478,12 @@ DROP TABLE IF EXISTS destinations.sa_retail;
 CREATE TABLE destinations.sa_retail (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
+    osm_id BIGINT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -515,17 +525,18 @@ CREATE TABLE destinations.sa_schools (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    school_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(polygon, ?sa_crs)
 );
 
 -- insert points from polygons
 INSERT INTO destinations.sa_schools (
-    osm_id, school_name, geom_pt, geom_poly
+    osm_id, dest_name, geom_pt, geom_poly
 )
 SELECT  osm_id,
         name,
@@ -549,7 +560,7 @@ ANALYZE destinations.sa_schools (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_schools (
-    osm_id, school_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -588,17 +599,18 @@ CREATE TABLE destinations.sa_social_services (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    service_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(polygon, ?sa_crs)
 );
 
 -- insert points from polygons
 INSERT INTO destinations.sa_social_services (
-    osm_id, service_name, geom_pt, geom_poly
+    osm_id, dest_name, geom_pt, geom_poly
 )
 SELECT  osm_id,
         name,
@@ -622,7 +634,7 @@ ANALYZE destinations.sa_social_services (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_social_services (
-    osm_id, service_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -661,17 +673,18 @@ CREATE TABLE destinations.sa_supermarkets (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    supermarket_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(polygon, ?sa_crs)
 );
 
 -- insert points from polygons
 INSERT INTO destinations.sa_supermarkets (
-    osm_id, supermarket_name, geom_pt, geom_poly
+    osm_id, dest_name, geom_pt, geom_poly
 )
 SELECT  osm_id,
         name,
@@ -695,7 +708,7 @@ ANALYZE destinations.sa_supermarkets (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_supermarkets (
-    osm_id, supermarket_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,
@@ -734,17 +747,18 @@ CREATE TABLE destinations.sa_transit (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    transit_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(polygon, ?sa_crs)
 );
 
 -- insert points from polygons
 INSERT INTO destinations.sa_transit (
-    osm_id, transit_name, geom_pt, geom_poly
+    osm_id, dest_name, geom_pt, geom_poly
 )
 SELECT  osm_id,
         name,
@@ -811,10 +825,11 @@ CREATE TABLE destinations.sa_universities (
     id SERIAL PRIMARY KEY,
     cell_id CHARACTER VARYING(18)[],
     osm_id BIGINT,
-    college_name TEXT,
+    dest_name TEXT,
     pop_low_stress INT,
     pop_high_stress INT,
     pop_score FLOAT,
+    dest_type TEXT,
     geom_pt geometry(point, ?sa_crs),
     geom_poly geometry(multipolygon, ?sa_crs)
 );
@@ -837,7 +852,7 @@ ANALYZE destinations.sa_universities (geom_poly);
 
 -- insert points
 INSERT INTO destinations.sa_universities (
-    osm_id, college_name, geom_pt
+    osm_id, dest_name, geom_pt
 )
 SELECT  osm_id,
         name,

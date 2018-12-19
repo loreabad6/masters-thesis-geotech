@@ -27,12 +27,12 @@ db_pass = rstudioapi::askForPassword("Database password")
 
 ```{r variables, warning = FALSE, include = FALSE}
 ## Basic variables to set 
-country = "UK" # Possible options: UK, US, Netherlands, NA
+country = "UK" # Possible options: UK, US (not yet), Netherlands, NA
 sa_name = "Corby" # study area
 sa_crs = 3857 # crs
 biking_distance = 3000 ## in meters
 
-area_type = "osm" ## possible options: "
+area_type = "osm" ## possible options: 
                   ## "osm" for any country
                   ## "ttwa" for the UK
 
