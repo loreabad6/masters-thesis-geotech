@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Joint Students’ Presentations</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Lorena Abad" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Joint Students’ Presentations
+## Results of experiments or Implementation
+### Lorena Abad
+### January 9th, 2019
+
+---
+
+
+
+
+background-image: url(https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=b104c850fee7b7c4035e1477b1c13704)
+background-size: cover
+class: right, top
+
+## What has happened so far?
+
+--
+
+.pull-left[
+
+### Last presentation:
+
+Preliminary results for hypothesis 1 and 3 
+
+Shared some doubts...
+]
+
+--
+.pull-right[
+
+### During these four weeks:
+
+Added 19 more example cities in the UK
+
+Came up with a better normalization for the data
+
+Finished testing my three hypothesis
+
+Writing...
+]
+
+---
+class: center, top
+
+## BNA Breakdown
+
+
+.center[&lt;img src="figs/bna_schema_new.png" style="width: 90%" /&gt;]
+
+---
+class: center, top
+
+## Levels of Traffic Stress
+
+
+.center[&lt;img src="figs/lts.png" style="width: 70%" /&gt;]
+
+---
+class: center, top
+
+## **Hypothesis 1** 
+
+More people bike if there is a low stress network connecting their origin to their destination.
+
+.center[&lt;img src="figs/bna_schema_lts.png" style="width: 80%" /&gt;]
+---
+class: center, top
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_lts.png" style="width: 100%" /&gt;
+
+**Hypothesis 1** 
+
+More people bike if there is a low stress network connecting their origin to their destination.
+
+![](Pres4_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+
+]
+]
+
+.right-column[
+
+![](Pres4_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_lts.png" style="width: 100%" /&gt;
+
+**Hypothesis 1** 
+
+More people bike if there is a low stress network connecting their origin to their destination.
+
+![](Pres4_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+]
+]
+
+.rigth-column[
+.center[
+
+![](Pres4_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+]
+]
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_lts.png" style="width: 100%" /&gt;
+
+**Hypothesis 1** 
+
+More people bike if there is a low stress network connecting their origin to their destination.
+
+![](Pres4_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+]
+]
+
+.right-column[
+
+.pull-left[
+*Welch Two Sample T-test*
+
+p-value = 8.703e-07
+
+alternative hypothesis: true difference in means is not equal to 0
+]
+
+.pull-right[
+*Mann-Whitney test*
+
+p-value &lt; 2.2e-16
+
+alternative hypothesis: true location shift is not equal to 0
+]
+
+.center[
+![](Pres4_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+]
+
+]
+
+???
+
+Welch Two Sample t-test 
+
+Different variances 
+Significant difference between the mean of both groups, i.e. the percentage of bike trips between OD pairs is significantly higher on a low stress bike network.
+
+Non-parametric distribution: Mann-Whitney test to check if the populations differ
+
+At 5% significance level it can be concluded that the percentage of trips done by bike on a low or high stress connection are from nonidentical populations.
+
+---
+class: center, top
+
+## **Hypothesis 2** 
+
+More people bike to the highly ranked destinations according to the BNA score.
+
+.center[&lt;img src="figs/bna_schema_destinations.png" style="width: 80%" /&gt;]
+
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_destinations.png" style="width: 100%" /&gt;
+
+**Hypothesis 2** 
+
+More people bike to the highly ranked destinations according to the BNA score.
+
+![](Pres4_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+]
+]
+
+.right-column[
+![](Pres4_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+]
+
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_destinations.png" style="width: 100%" /&gt;
+
+**Hypothesis 2** 
+
+More people bike to the highly ranked destinations according to the BNA score.
+
+![](Pres4_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+]
+]
+
+.right-column[
+![](Pres4_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+]
+
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_destinations.png" style="width: 100%" /&gt;
+
+**Hypothesis 2** 
+
+More people bike to the highly ranked destinations according to the BNA score.
+
+![](Pres4_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+]
+]
+
+.right-column[
+![](Pres4_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+]
+
+---
+class: center, top
+## **Hypothesis 3** 
+
+"There is likely a relationship between connectivity and actual bicycling activity." (Lowry &amp; Hadden, 2017)
+
+.center[&lt;img src="figs/bna_schema_score.png" style="width: 80%" /&gt;]
+
+---
+class: center, middle
+
+.left-column[
+
+.center[
+
+&lt;img src="figs/bna_schema_score.png" style="width: 100%" /&gt;
+
+**Hypothesis 3** 
+
+There is likely a relationship between connectivity and actual bicycling activity.
+
+![](Pres4_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+]
+
+.right-column[
+![](Pres4_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+]
+
+
+---
+background-image: url(https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=b104c850fee7b7c4035e1477b1c13704)
+background-size: cover
+class: center, top
+
+## What will happen next?
+
+*...*
+
+--
+
+Writing the final document
+
+--
+
+_If there is enough time:_
+
+Create a shiny app
+
+Enhance the code and put it into an R package
+
+---
+
+background-image: url(https://images.unsplash.com/photo-1454810945947-518fa697f0cf?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=653af866fd32821840885dc94c74a85d)
+background-size: cover
+class: center, top, inverse
+
+## Thank you!
+
+--
+## Questions/Comments?
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
