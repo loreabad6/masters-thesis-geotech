@@ -119,19 +119,19 @@ ggplot() +
 
 ```{r, echo = F, fig.width=13, fig.height=10}
 ggplot() + 
-  geom_boxplot(
+  geom_bar(
     data = lts_zones, 
     aes(
       reorder(city,total_bike_trips), 
       bikeshare, 
-      color = stress_level
+      fill = stress_level
     ),
-    position = "dodge2", 
-    alpha = 0,
-    outlier.colour = "red",
-    outlier.shape = 20
+    position = "dodge", 
+    alpha = 1,
+    stat = 'identity',
+    width = 0.6
   ) +
-  scale_color_manual(
+  scale_fill_manual(
     values = c("firebrick1", "deepskyblue3")
   ) +
   coord_flip() +
@@ -196,26 +196,51 @@ alternative hypothesis: true location shift is not equal to 0
 ]
 
 .center[
-```{r, echo = F, fig.width=8, fig.height=6}
-ggplot(lts_zones, aes(stress_level, bikeshare)) +
-  geom_jitter(alpha = 0.1, size = 1, aes(color = low_stress)) +
+```{r, echo = F, fig.width=10,fig.height=5}
+obs <- lts_zones %>% 
+  group_by(stress_level) %>% 
+  summarize(
+    n = paste("n = ", n()),
+    mean = paste("mean = ", round(mean(bikeshare),2)),
+    sd = paste("sd = ", round(sd(bikeshare),2))
+  ) %>% 
+  mutate(label = paste(n, mean, sd, sep = "\n"))
+
+ggplot(lts_zones, aes(x = bikeshare)) + 
+  geom_histogram(
+    aes(fill = stress_level),
+    binwidth = 1,
+    color = "grey30",
+    show.legend = FALSE
+  ) +
+  geom_rug(
+    aes(color = stress_level), 
+    alpha = 0.8, 
+    show.legend = FALSE
+  ) +
+  xlab("Bike share (%)") + ylab("Count") +
+  facet_grid(~ stress_level, scales = "free_y") + 
+  geom_text(
+    data = obs,
+    aes(x = 70, y = 5000, label = label),
+    colour = "grey30",
+    size = 6,
+    family = "serif",
+    parse = FALSE
+  ) +
+  scale_fill_manual(
+    values = c("firebrick1", "deepskyblue3")
+  ) +
   scale_color_manual(
     values = c("firebrick1", "deepskyblue3")
   ) +
-  geom_tufteboxplot(
-    color = "grey30",
-    lwd = 2,
-    outlier.colour = NA
-  ) +
-  ylab("Bike share (%)") + xlab("Stress level") +
   theme_tufte() +
   theme(
-    legend.position = "none",
-    panel.grid.major.y = element_line(
-      color = "grey90", 
+    panel.grid = element_line(
+      color = "grey70", 
       linetype = "dotted"
     ),
-    text = element_text(size=18)
+    text = element_text(size=20)
   )
 ```
 ]
