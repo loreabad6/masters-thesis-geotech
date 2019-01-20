@@ -546,6 +546,7 @@ sqldf(
   connection = connection
 )
 
+## ----data_plot -----------------
 ## Call data for results
 bna_score_table <- dbGetQuery(
   connection,
@@ -554,7 +555,6 @@ bna_score_table <- dbGetQuery(
   )
 )
 
-## ----data_plot -----------------
 ## Call data into R
 pop <- paste0(gsub("^(.*?),.*", "\\1", tolower(sa_name)),"_pop_grid")
 sn <- paste0(gsub("^(.*?),.*", "\\1", tolower(sa_name)),"_stress_network")
@@ -570,8 +570,7 @@ stress_network <- st_read(
 )
 
 ## Establish colors and breaks for the BNA display based on the PfB visualizer
-bna_pal <- c("#FC7151","#DC7E6A","#C98875","#C08B83","#AD9396",
-             "#9C9A9F","#929EAC","#78AAC5","#6FADCB","#49BFE6")
+bna_pal <- rev(scales::seq_gradient_pal('#0099CC', '#FF3030', "Lab")(seq(0,1,length.out=10)))
 
 bna_breaks <- c(10,20,30,40,50,60,70,80,90,100)
 
