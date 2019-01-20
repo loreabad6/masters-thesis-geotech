@@ -1,4 +1,27 @@
 ## ---- connection --------------
+# Install packages if needed
+if(!require(devtools))
+  install.packages("devtools", repos = "http://cran.rstudio.com")
+if(!require(RPostgreSQL))
+  install.packages("RPostgreSQL", repos = "http://cran.rstudio.com")
+if(!require(sqldf))
+  install.packages("sqldf", repos = "http://cran.rstudio.com")
+if(!require(readr))
+  install.packages("readr", repos = "http://cran.rstudio.com")
+if(!require(sf))
+  install.packages("sf", repos = "http://cran.rstudio.com")
+if(!require(dplyr))
+  install.packages("dplyr", repos = "http://cran.rstudio.com")
+if(!require(osmdata))
+  devtools::install_github("ropensci/osmdata")
+if(!require(tmap))
+  install.packages("tmap", repos = "http://cran.rstudio.com")
+## kableExtra v. 1.0.0 has an issue with inline display with R markdown and notebooks
+## Until it is fixed, version 0.9.0 will be used
+if(!require(kableExtra))
+  devtools::install_version("kableExtra", version = "0.9.0", repos = "http://cran.rstudio.com")
+
+# Load packages
 library(DBI)
 library(RPostgreSQL)
 library(sqldf)
@@ -6,6 +29,9 @@ library(readr)
 library(utils)
 library(sf)
 library(dplyr)
+library(osmdata)
+library(tmap)
+library(kableExtra)
 
 # Call useful functions
 source("scripts/utils.R")
@@ -577,12 +603,10 @@ bna_breaks <- c(10,20,30,40,50,60,70,80,90,100)
 stress_network$ft_stress <- ifelse(stress_network$ft_seg_stress == 1,"low stress","high stress")
 stress_network$tf_stress <- ifelse(stress_network$tf_seg_stress == 1,"low stress","high stress")
 
-## Call plotting library and set to mode view
-library(tmap)
+## Set tmap to mode view
 tmap_mode("view")
 
 ## ----display_table -------------
-library(kableExtra)
 bna_display <- bna_score_table %>% mutate(
   category = c(
     "Total People",
