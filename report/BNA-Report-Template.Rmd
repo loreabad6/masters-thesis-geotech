@@ -63,7 +63,7 @@ within a biking distance of
 ```{r area, include=FALSE, cache = FALSE}
 ```
 
-```{r verify_area, echo = FALSE}
+```{r verify_area, include = FALSE, echo = FALSE}
 library(tmap)
 tmap_mode("view")
 qtm(boundary, borders = "red", borders.lwd = 3, fill = NULL, basemaps = "OpenStreetMap")
@@ -111,31 +111,7 @@ tmap_leaflet(
 
 ## Results
 
-```{r, include = FALSE, warning = FALSE}
-## Call data into R
-library(sf)
-bna_score <- st_read(
-  dsn = connection,
-  layer = c("generated","sa_pop_grid")
-) %>% mutate(bna_popup = round(overall_score),2)
-
-stress_network <- st_read(
-  dsn = connection,
-  query = "SELECT ft_seg_stress, tf_seg_stress, geom FROM received.sa_ways"
-)
-
-## Establish colors and breaks for the BNA display based on the PfB visualizer
-bna_pal <- c("#FC7151","#DC7E6A","#C98875","#C08B83","#AD9396",
-             "#9C9A9F","#929EAC","#78AAC5","#6FADCB","#49BFE6")
-
-bna_breaks <- c(6,12,18,24,30,36,42,48,54,100)
-
-stress_network$ft_stress <- ifelse(stress_network$ft_seg_stress == 1,"low stress","high stress")
-stress_network$tf_stress <- ifelse(stress_network$tf_seg_stress == 1,"low stress","high stress")
-
-## Call plotting library and set to mode view
-library(tmap)
-tmap_mode("view")
+```{r data_plot, include = FALSE, warning = FALSE, echo = FALSE, cache = FALSE}
 ```
 
 ```{r, fig.width = 10, fig.height= 5, fig.align = 'center', echo = FALSE, warning = FALSE}

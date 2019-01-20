@@ -286,13 +286,6 @@ dbSendQuery(connection,statement = preppopgrid)
 rm(preppopgrid)
 
 ## ---- reachable_roads --------------
-library(DBI)
-library(RPostgreSQL)
-library(sqldf)
-library(readr)
-library(utils)
-library(sf)
-library(dplyr)
 
 # Reachable high stress
 
@@ -472,9 +465,6 @@ overallsc <- sqlInterpolate(
 dbSendQuery(connection,statement = overallsc)
 rm(overallsc)
 
-## Call data for results
-bna_score_table <- dbGetQuery(connection,statement = "SELECT * FROM generated.sa_overall_scores")
-
 ### Create bna_score tables for study area on results schema
 
 ## Ways with stress network 
@@ -482,7 +472,7 @@ sqldf(
   paste0(
     "DROP TABLE IF EXISTS results.",gsub("^(.*?),.*", "\\1", sa_name),"_stress_network;
     CREATE TABLE results.",gsub("^(.*?),.*", "\\1", sa_name),"_stress_network AS
-    SELECT ft_seg_stress, ft_int_stress, tf_seg_stress, tf_int_stress, geom 
+    SELECT osm_id, ft_seg_stress, ft_int_stress, tf_seg_stress, tf_int_stress, geom 
     FROM received.sa_ways;"
   ),
   connection = connection
@@ -556,6 +546,42 @@ sqldf(
   connection = connection
 )
 
+## Call data for results
+bna_score_table <- dbGetQuery(
+  connection,
+  statement = paste0(
+    "SELECT * FROM results.",gsub("^(.*?),.*", "\\1", tolower(sa_name)),"_overall_scores"
+  )
+)
+
+## ----data_plot -----------------
+## Call data into R
+pop <- paste0(gsub("^(.*?),.*", "\\1", tolower(sa_name)),"_pop_grid")
+sn <- paste0(gsub("^(.*?),.*", "\\1", tolower(sa_name)),"_stress_network")
+
+bna_score <- st_read(
+  dsn = connection,
+  layer = c("results",pop)
+) %>% mutate(bna_popup = round(overall_score),2)
+
+stress_network <- st_read(
+  dsn = connection,
+  layer = c("results",sn)
+)
+
+## Establish colors and breaks for the BNA display based on the PfB visualizer
+bna_pal <- c("#FC7151","#DC7E6A","#C98875","#C08B83","#AD9396",
+             "#9C9A9F","#929EAC","#78AAC5","#6FADCB","#49BFE6")
+
+bna_breaks <- c(10,20,30,40,50,60,70,80,90,100)
+
+stress_network$ft_stress <- ifelse(stress_network$ft_seg_stress == 1,"low stress","high stress")
+stress_network$tf_stress <- ifelse(stress_network$tf_seg_stress == 1,"low stress","high stress")
+
+## Call plotting library and set to mode view
+library(tmap)
+tmap_mode("view")
+
 ## ----display_table -------------
 library(kableExtra)
 bna_display <- bna_score_table %>% mutate(
@@ -610,10 +636,10 @@ bna_display <- bna_display %>% mutate(
     score,
     "html", 
     color = ifelse(
-      score >= 54 & score <= 100,
+      score >= 60 & score <= 100,
       "#009acd",
       ifelse(
-        score < 54,
+        score < 60,
         "#ff3030",
         "#666666"
       )
