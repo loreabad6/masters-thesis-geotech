@@ -155,7 +155,8 @@ grid <- function(s = 9){
   grid <- grid %>% mutate(
     area = NULL,
     id = NULL,
-    population = grid$tot_p/s
+    population = grid$tot_p/s,
+    jobs = as.integer(0)
   )
   
   grid %>% st_transform(crs = sa_crs)

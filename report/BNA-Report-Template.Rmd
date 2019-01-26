@@ -27,8 +27,8 @@ db_pass = rstudioapi::askForPassword("Database password")
 
 ```{r variables, warning = FALSE, include = FALSE}
 ## Basic variables to set 
-country = "UK" # Possible options: UK, US (not yet), Netherlands, NA
-sa_name = "Corby" # study area
+country = "NA" # Possible options: UK, US (not yet), Netherlands, NA
+sa_name = "Castellon de la Plana" # study area
 sa_crs = 3857 # crs
 biking_distance = 3000 ## in meters
 
@@ -36,7 +36,7 @@ area_type = "osm" ## possible options:
                   ## "osm" for any country
                   ## "ttwa" for the UK
 
-min_area = "lsoa" ## possible options: 
+min_area = "geostat" ## possible options: 
                   ## "geostat" for any country, 
                   ## "lsoa" or "msoa" for the UK
                   ## "cb" for the US (not yet)
@@ -47,7 +47,7 @@ subdivisions = 4
 ```
 
 * You calculated the BNA score for 
-<span style="color:#BB616D">**`r sa_name`, `r country`**</span> 
+<span style="color:#BB616D">**`r sa_name`, `r ifelse(country != NA,country,'')`**</span> 
 within a biking distance of 
 <span style="color:#BB616D">**`r biking_distance/1000`**</span> km. 
 
@@ -57,13 +57,13 @@ within a biking distance of
 <span style="color:#BB616D">**`r ifelse(area_type == "ttwa","Travel to Work Area","OSM boundary area")`**</span> (red) based on 
 <span style="color:#BB616D">**`r ifelse(min_area == "msoa","its Middle Layer Superoutput Areas (MSOA)",ifelse(min_area == "lsoa","its Lower Layer Superoutput Areas (LSOA)",ifelse(min_area == "cb","its census blocks",ifelse(min_area == "buurt","its neighborhood areas","a subdivided population grid from GEOSTAT"))))`**</span> (green).
 
-```{r connection, include=FALSE, cache = FALSE}
+```{r connection, include = FALSE, cache = FALSE}
 ```
 
-```{r area, include=FALSE, cache = FALSE}
+```{r area, include = FALSE, cache = FALSE}
 ```
 
-```{r verify_area, include = FALSE, echo = FALSE}
+```{r verify_area, results = 'hide', echo = FALSE}
 library(tmap)
 tmap_mode("view")
 qtm(boundary, borders = "red", borders.lwd = 3, fill = NULL, basemaps = "OpenStreetMap")
