@@ -1,5 +1,5 @@
 a, a > code {
-  color: rgb(249, 38, 114);
+  color: #ffffff;
   text-decoration: none;
 }
 .footnote {
@@ -51,6 +51,7 @@ blockquote {
   border-left: solid 5px lightgray;
   padding-left: 1em;
 }
+
 .remark-slide table {
   margin: auto;
   border-top: 1px solid #666;

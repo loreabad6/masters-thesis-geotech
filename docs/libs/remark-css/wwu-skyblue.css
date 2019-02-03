@@ -1,0 +1,147 @@
+.title-slide {
+  background-image: url(https://raw.githubusercontent.com/loreabad6/wwu-xaringan-figs/master/wwu-slyblue.png);
+  background-size: cover;
+}
+
+.title-slide .bg-text{
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  text-align: left;
+  color: #4D4D4A;
+}
+
+.title-slide .remark-slide-number {
+  display: none;
+}
+
+.title-slide h1 {
+  padding-top: 0px;
+  font-size: 40px;
+  text-align: left;
+  color: #4D4D4A;
+  text-shadow: 0 0 0px;
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+}
+
+.title-slide h2 {
+  font-size: 30px;
+  text-align: left;
+  color: #4D4D4A;
+  text-shadow: 0 0 0px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.title-slide h3 {
+  font-size: 25px;
+  color: #26272A;
+  text-align: left;
+  text-shadow: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 1;
+}
+
+.full-width {
+  padding-top: 10px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  padding-left: 20px;
+}
+
+.full-width .remark-slide-number {
+  display: none;
+}
+
+.pull-left-logo {
+  float: left;
+  width: 15%;
+}
+.pull-right-logo {
+  float: right;
+  width: 85%;
+}
+
+.pull-right-logo ~ * {
+  clear: both;
+}
+
+.col-narrow {
+  float: left;
+  width: 16%;
+}
+
+.col-narrow ~ * {
+  clear: all;
+}
+
+.col-30 {
+  float: left;
+  width: 30%;
+}
+
+.col-30 ~ * {
+  clear: all;
+}
+
+.col-wide {
+  float: left;
+  width: 42%;
+}
+
+.col-wide ~ * {
+  clear: all;
+}
+
+.col-mid-wide {
+  float: left;
+  width: 58%;
+}
+
+.col-mid-wide ~ * {
+  clear: all;
+}
+.col-extra-wide {
+  float: left;
+  width: 68%;
+}
+
+.col-extra-wide ~ * {
+  clear: all;
+}
+
+.col-onethird {
+  float: left;
+  width: 33%;
+}
+
+.col-onethird ~ * {
+  clear: all;
+}
+
+.footnote-credits {
+  position: absolute;
+  bottom: 0.5em;
+  padding-right: 1em;
+  font-size: 70%;
+}
+
+div.my-header {
+    background-color: #272822;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+div.my-header span {
+    font-size: 10pt;
+    color: #009ACD;
+    position: absolute;
+    left: 15px;
+    bottom: 2px;
+}

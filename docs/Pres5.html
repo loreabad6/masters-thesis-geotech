@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Validating a bike network analysis score based on open data as a connectivity measure of urban cycling infrastructure adapted for European cities</title>
+    <meta charset="utf-8">
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/wwu-skyblue.css" rel="stylesheet" />
+    <link href="libs/remark-css/wwu-fonts.css" rel="stylesheet" />
+    <link href="libs/font-awesome-animation/font-awesome-animation-emi.css" rel="stylesheet" />
+    <script src="libs/fontawesome/js/fontawesome-all.min.js"></script>
+    <script src="libs/kePrint/kePrint.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Validating a bike network analysis score based on open data as a connectivity measure of urban cycling infrastructure adapted for European cities
+## Supervisors: Edzer Pebesma, Marco Painho, Francisco Ramos
+### Lorena Abad Crespo
+### February 4th, 2019
+
+---
+
+
+
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Background
+
+.col-wide[
+.center[
+
+&lt;img src="figs/pfbEx.png" style="width: 80%" /&gt;
+
+PeopleForBikes BNA score
+]
+]
+
+--
+
+.col-mid-wide[
+.center[
+### How well the **&lt;span style="color:#009ACD;"&gt;bike network&lt;/span&gt;** in a community connects people with the places they want to go.
+]
+]
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Background
+
+.col-wide[
+.center[
+
+&lt;img src="figs/pfbEx.png" style="width: 80%" /&gt;
+
+PeopleForBikes BNA score
+]
+]
+
+.col-mid-wide[
+.center[
+&lt;img src="figs/lts.png" style="width: 80%" /&gt;
+
+Levels of Traffic Stress
+]
+]
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Background
+
+.col-wide[
+.center[
+
+&lt;img src="figs/pfbEx.png" style="width: 80%" /&gt;
+
+PeopleForBikes BNA score
+]
+]
+
+.col-mid-wide[
+.center[
+### How well the bike network in a community connects people with **&lt;span style="color:#009ACD;"&gt;the places they want to go&lt;/span&gt;**.
+]
+]
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Background
+
+.col-wide[
+.center[
+
+&lt;img src="figs/pfbEx.png" style="width: 80%" /&gt;
+
+PeopleForBikes BNA score
+]
+]
+
+.col-narrow[
+.center[
+
+&lt;img src="figs/opendata.png" style="width: 90%" /&gt;
+
+Open data
+]
+]
+
+--
+
+.col-wide[
+.center[
+&lt;img src="figs/bnalisbon.png" style="width: 80%" /&gt;
+
+BNA score adapted to Lisbon
+]
+]
+
+---
+class: middle, center, inverse
+background-image: url(https://images.unsplash.com/photo-1530693326528-62d228248111?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9)
+background-size: 110% 
+background-position: right 0px bottom -600px
+
+### &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; &lt;br&gt; Is the BNA score truely &lt;br&gt; representing bicycle &lt;br&gt; network connectivity?
+
+&lt;!-- 
+&lt;br&gt; 
+&lt;span style="color:black;"&gt;
+&lt;/span&gt;
+--&gt;
+
+.footnote-credits[ 
+Photo by Kyle Thacker on Unsplash
+]
+
+---
+class: middle, center
+&lt;div class="my-header"&gt;&lt;span&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+# Aim
+
+<span>&lt;i class="fas  fa-check-circle fa-3x faa-tada animated faa-slow " style=" color:#009ACD;"&gt;&lt;/i&gt;</span>
+
+### Validate the BNA score
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt;
+
+## Core elements
+
+.col-onethird[
+.center[
+### Stress Network
+
+&lt;img src="Pres5_files/figure-html/element1-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+.col-onethird[
+.center[
+### Destinations
+
+&lt;img src="Pres5_files/figure-html/element2-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+.col-onethird[
+.center[
+### BNA score
+
+&lt;img src="Pres5_files/figure-html/element3-1.png" style="display: block; margin: auto;" /&gt;
+
+]
+]
+--
+.col-onethird[.center[Are more people biking if there is a low stress network connecting their origin to their destination?]]
+
+.col-onethird[.center[Are more people biking to the destinations highly ranked in the BNA score?]]
+
+.col-onethird[.center[Is there a relationship between the BNA score and actual bicycling activity?]]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Ideal validation data 
+ 
+.col-onethird[
+.center[
+### Origin-Destination areas
+
+![](Pres5_files/figure-html/od-1.png)&lt;!-- --&gt;
+]
+]
+
+.col-onethird[
+.center[
+### Number of bike trips
+
+![](Pres5_files/figure-html/mode-1.png)&lt;!-- --&gt;
+]
+]
+
+.col-onethird[
+.center[
+### Trip purpose
+![](Pres5_files/figure-html/purpose-1.png)&lt;!-- --&gt;
+]
+]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Validation data available
+
+.col-mid-wide[
+.center[
+
+![](Pres5_files/figure-html/ukflow-1.png)&lt;!-- --&gt;
+
+### UK census flow data
+
+]
+]
+--
+.col-narrow[
+.center[
+&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/od-1.png" style="width: 70%" /&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/mode-1.png" style="width: 70%" /&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/purpose-1.png" style="width: 70%" /&gt;
+]
+]
+
+.col-narrow[
+.center[
+&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;svg style="height:70;fill:#FF3030;" viewBox="0 0 512 512"&gt;&lt;path d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z"/&gt;&lt;/svg&gt;
+]
+]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Validation data available
+
+.col-mid-wide[
+.center[
+
+![](Pres5_files/figure-html/ukflow-stress-1.png)&lt;!-- --&gt;
+
+### UK census flow data
+
+]
+]
+
+.col-30[
+.center[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/element1-1.png" style="width: 70%" /&gt;
+&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+]
+]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Validation data available
+
+.col-mid-wide[
+.center[
+
+![](Pres5_files/figure-html/ukflow-perc-1.png)&lt;!-- --&gt;
+
+### UK census flow data
+
+]
+]
+
+.col-30[
+.center[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/element3-1.png" style="width: 70%" /&gt;
+&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+
+]
+]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Validation data available
+
+.col-extra-wide[
+.center[
+&lt;img src="figs/ftw.gif" style="width: 60%" /&gt;
+
+### Dutch Fietstelweek data 
+]
+]
+--
+.col-narrow[
+.center[
+&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/od-1.png" style="width: 70%" /&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/mode-1.png" style="width: 70%" /&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/purpose-1.png" style="width: 70%" /&gt;
+]
+]
+
+.col-narrow[
+.center[
+&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;svg style="height:70;fill:#FF3030;" viewBox="0 0 512 512"&gt;&lt;path d="M464 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h416c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-83.6 290.5c4.8 4.8 4.8 12.6 0 17.4l-40.5 40.5c-4.8 4.8-12.6 4.8-17.4 0L256 313.3l-66.5 67.1c-4.8 4.8-12.6 4.8-17.4 0l-40.5-40.5c-4.8-4.8-4.8-12.6 0-17.4l67.1-66.5-67.1-66.5c-4.8-4.8-4.8-12.6 0-17.4l40.5-40.5c4.8-4.8 12.6-4.8 17.4 0l66.5 67.1 66.5-67.1c4.8-4.8 12.6-4.8 17.4 0l40.5 40.5c4.8 4.8 4.8 12.6 0 17.4L313.3 256l67.1 66.5z"/&gt;&lt;/svg&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+]
+]
+
+---
+class: left, top
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Validation data available
+
+.col-extra-wide[
+.center[
+&lt;img src="figs/ftw_dest.gif" style="width: 60%" /&gt;
+
+### Dutch Fietstelweek data 
+]
+]
+
+.col-30[
+.center[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="Pres5_files/figure-html/element2-1.png" style="width: 70%" /&gt;
+&lt;br&gt;
+&lt;svg style="height:70;fill:#009ACD;" viewBox="0 0 448 512"&gt;&lt;path d="M400 480H48c-26.51 0-48-21.49-48-48V80c0-26.51 21.49-48 48-48h352c26.51 0 48 21.49 48 48v352c0 26.51-21.49 48-48 48zm-204.686-98.059l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.248-16.379-6.249-22.628 0L184 302.745l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.25 16.379 6.25 22.628.001z"/&gt;&lt;/svg&gt;
+]
+]
+
+---
+class: full-width
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+
+
+
+![](Pres5_files/figure-html/sa-1.png)&lt;!-- --&gt;
+
+---
+class: full-width
+
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+![](Pres5_files/figure-html/sa_n-1.png)&lt;!-- --&gt;
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+.pull-left-logo[&lt;img src="Pres5_files/figure-html/element1-1.png" style="width: 80%" /&gt; ]
+
+.pull-right-logo[## Stress network validation]
+
+&lt;img src="Pres5_files/figure-html/stressOD-1.png" style="display: block; margin: auto;" /&gt;
+--
+
+### Welch Two Sample t-test
+
+&lt;table class="table" style="font-size: 16px; float: left; margin-right: 10px;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;background-color: white;"&gt; t-statistic &lt;/th&gt;
+   &lt;th style="text-align:center;background-color: white;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:center;background-color: white;"&gt; p-value &lt;/th&gt;
+   &lt;th style="text-align:center;background-color: white;"&gt; Significance level &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;width: 7cm; "&gt; -6.112 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 7cm; "&gt; 34099 &lt;/td&gt;
+   &lt;td style="text-align:center;width: 7cm; "&gt; 9.943e-10*** &lt;/td&gt;
+   &lt;td style="text-align:center;width: 7cm; "&gt; 0.05 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+.pull-left-logo[&lt;img src="Pres5_files/figure-html/element2-1.png" style="width: 80%" /&gt; ]
+
+.pull-right-logo[## Destinations validation]
+
+&lt;img src="Pres5_files/figure-html/destFTW-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+.pull-left-logo[&lt;img src="Pres5_files/figure-html/element2-1.png" style="width: 80%" /&gt; ]
+
+.pull-right-logo[## Destinations validation]
+
+.col-extra-wide[
+.center[
+
+&lt;img src="Pres5_files/figure-html/imp-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+.col-30[
+.center[
+### Spearman correlation
+
+`\(\rho\)` = 0.07511
+
+p = 0.8073
+
+`\(\alpha\)` = 0.05
+]
+]
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+.pull-left-logo[&lt;img src="Pres5_files/figure-html/element3-1.png" style="width: 80%" /&gt; ]
+
+.pull-right-logo[## BNA score validation]
+
+
+
+.col-extra-wide[
+.center[
+&lt;img src="Pres5_files/figure-html/scorecorplot-1.png" style="display: block; margin: auto;" /&gt;
+]
+]
+
+.col-30[
+.center[
+### Spearman correlation
+
+`\(\rho\)` = 0.57
+
+p = 0.00094
+
+`\(\alpha\)` = 0.05
+]
+]
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Summary
+
+.pull-left-logo[ 
+&lt;img src="Pres5_files/figure-html/element1-1.png" style="width: 100%" /&gt;
+
+&lt;img src="Pres5_files/figure-html/element2-1.png" style="width: 100%" /&gt;
+
+&lt;img src="Pres5_files/figure-html/element3-1.png" style="width: 100%" /&gt; 
+]
+
+.pull-right-logo[
+
+&lt;br&gt;
+- Statistically significant difference between groups.
+- What type of cyclists are using the bike to travel to work?
+
+&lt;br&gt;
+&lt;br&gt;
+
+- No significant relationship between end of trips and BNA destinations.
+- Destination's importance should be re-evaluated.
+- Consider other types of destinations.
+
+&lt;br&gt;
+&lt;br&gt;
+
+- Significant relationship between BNA score and bike share.
+- Only trips to work are evaluated.
+]
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&lt;font color="#9D9C9C"&gt;
+Conclusion
+&lt;/font&gt;
+&lt;/span&gt;&lt;/div&gt; 
+
+## Limitations 
+
+.center[&lt;img src="figs/limitations.png" style="width: 60%" /&gt; ]
+
+---
+&lt;div class="my-header"&gt;&lt;span&gt;
+&lt;font color="#9D9C9C"&gt;
+Introduction 
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Methodology
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Results
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Discussion
+&lt;/font&gt;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;
+Conclusion
+&lt;/span&gt;&lt;/div&gt; 
+
+## Conclusion
+
+.middle[
+.center[
+
+### **Research question**
+
+Is the BNA score truely representing bike network connectivity?
+]
+]
+---
+class: middle, inverse
+
+background-image: url('figs/wwu-skyblue-inv.png')
+background-size: cover
+
+# Thank you!
+
+&lt;!-- Code and slides available here [![GitHub](figs/GitHub-Mark-Light-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech)  --&gt;
+&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
+Slides powered by [xaringan](https://github.com/yihui/xaringan)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
