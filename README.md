@@ -1,6 +1,9 @@
 # Geospatial Technologies Master's Thesis
 Advances of my master thesis for the [Erasmus Mundus Masters in Geospatial Technologies](http://mastergeotech.info/).
 
+The final document is [here](https://github.com/loreabad6/masters-thesis-geotech/blob/master/Thesis.pdf).
+The final presentation is [here](https://loreabad6.github.io/masters-thesis-geotech/Pres5.html#1)
+
 ## Topic
 
 Validating a bike network analysis score based on open data as a connectivity measure of urban cycling infrastructure adapted for European cities.
