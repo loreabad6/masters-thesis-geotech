@@ -86,6 +86,6 @@ The BNA score bases its methodology on [OSM](https://www.openstreetmap.org/) dat
 - [X] Include data for population and jobs for European cities _(Population data available for Europe, UK and NL, job data available for UK)_
 - [ ] \(Optional) Include data sources to compute the score in the US
 - [ ] \(Optional) Create a shiny app to show the computed results so far
-- [ ] Validate the level of traffic stress classification
-- [ ] Validate the destination's weights
-- [ ] Find an alternative set of destinations that cover people's needs when they commute by bike to use in European cities
+- [X] Validate the level of traffic stress classification
+- [X] Validate the destination's weights
+- [X] Find an alternative set of destinations that cover people's needs when they commute by bike to use in European cities
