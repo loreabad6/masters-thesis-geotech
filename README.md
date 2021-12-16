@@ -36,7 +36,8 @@ My thesis proposal can be accessed [here](https://loreabad6.github.io/masters-th
 <a name="use"></a>
 ##### How to use it?
 
-1. Create a database on its PostgreSQL. To test connection an empty table on the database called `test` should be created on the public schema
+0. Install PostgreSQL [here](https://www.postgresql.org/download/). For version 14 the installation process also includes pgadmin4, and let's you add the PostGIS extension on the Stack Builder application. Make sure `osm2pgsql` and `osm2pgrouting` are also installed.
+1. [Create a spatial database with pgadmin4](https://postgis.net/workshops/postgis-intro/creating_db.html). To test connection an empty table on the database called `test` should be created on the public schema
     + Tip: Run `FULL VACUUM/ANALYZE` frequently on the database to improve performance
     + Follow the tips on [this presentation](https://thebuild.com/presentations/not-your-job.pdf) to increase performance of the database
 2. Set path variables for `osm2pgsql` and `osm2pgrouting`

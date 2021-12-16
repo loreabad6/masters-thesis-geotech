@@ -1,1 +1,4 @@
 "masters-thesis-geotech/docs/.Renviron" 
+.Rproj.user
+*.Rproj
+*/temp/
