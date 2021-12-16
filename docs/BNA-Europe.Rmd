@@ -53,8 +53,6 @@ library(stringr)
 library(dplyr)
 library(kableExtra)
 
-# LOAD POSTGRESQL DRIVER
-driver <- dbDriver("PostgreSQL")
 # CREATE CONNECTION TO THE POSTGRESQL DATABASE
 # THE CONNECTION VARIABLE WILL BE USED FOR ALL FURTHER OPERATIONS
 connection <- dbConnect(
