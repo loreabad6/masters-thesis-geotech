@@ -10,6 +10,8 @@ output:
     theme: journal
     code_folding: hide
     df_print: tibble
+editor_options: 
+  chunk_output_type: inline
 ---
 [![GitHub](Figures/GitHub-Mark-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech) 
 
@@ -40,14 +42,23 @@ user_name = "postgres"
 ```
 
 ```{r, echo = TRUE, include = TRUE, warning = FALSE}
-library(RPostgreSQL)
+library(DBI)
+library(RPostgres)
+library(sqldf)
+library(osmdata)
+library(tmap)
+library(sf)
+library(utils)
+library(stringr)
+library(dplyr)
+library(kableExtra)
 
 # LOAD POSTGRESQL DRIVER
 driver <- dbDriver("PostgreSQL")
 # CREATE CONNECTION TO THE POSTGRESQL DATABASE
 # THE CONNECTION VARIABLE WILL BE USED FOR ALL FURTHER OPERATIONS
 connection <- dbConnect(
-  driver, 
+  RPostgres::Postgres(), 
   dbname = db_name,
   host = local_host, 
   port = port_num,
@@ -69,10 +80,20 @@ ifelse(
 
 ```{sql, connection = connection, echo = TRUE}
 CREATE EXTENSION IF NOT EXISTS hstore;
+```
+```{sql, connection = connection, echo = TRUE}
 CREATE EXTENSION IF NOT EXISTS postgis;
+```
+```{sql, connection = connection, echo = TRUE}
 CREATE EXTENSION IF NOT EXISTS pgrouting;
+```
+```{sql, connection = connection, echo = TRUE}
 CREATE SCHEMA IF NOT EXISTS destinations;
+```
+```{sql, connection = connection, echo = TRUE}
 CREATE SCHEMA IF NOT EXISTS generated;
+```
+```{sql, connection = connection, echo = TRUE}
 CREATE SCHEMA IF NOT EXISTS received;
 ```
 
@@ -96,10 +117,8 @@ Extract the study area boundary considering a buffer of half the biking distance
 # FUNCTION TO EXTRACT STUDY AREA BOUNDARY WITH OSM AND WRITE IT TO THE DATABASE
 sa_bb <- function (study_area, dist, crs, conn){
   # GET DATA FROM OSM
-  library(osmdata)
-  library(sf)
   study_area_bb <- study_area %>% 
-    getbb(format_out = "sf_polygon") %>%
+    getbb(format_out = "sf_polygon", limit = 1) %>%
     st_transform(crs = crs)
   
   ## ADD A BUFFER TO THE BOUNDARY
@@ -107,15 +126,17 @@ sa_bb <- function (study_area, dist, crs, conn){
     st_buffer(dist = 0.5*dist)
   
   # DELETE EXISTING BOUNDARY
-  library(sqldf)
   sqldf(
     "DROP TABLE IF EXISTS received.sa_boundary",
     connection = conn
   )
 
   # UPLOAD BOUNDARY TO POSTGRESQL DATABASE
-  library(RPostgreSQL)
-  dbWriteTable(conn, c("received","sa_boundary"), study_area_bb)
+  dbWriteTable(
+    conn,
+    name = Id(schema = "received", table = "sa_boundary"),
+    value = study_area_bb
+  )
   
   study_area_bb
 }
@@ -129,7 +150,6 @@ boundary <- sa_bb(
 ```
 
 ```{r, fig.width = 8, fig.height= 8, echo = TRUE, warning = FALSE}
-library(tmap)
 tmap_mode("view")
 qtm(
   shp = boundary, 
@@ -150,7 +170,6 @@ sa_download <- function(conn){
         ST_Extent((ST_Transform(geometry,4326)))
         FROM received.sa_boundary") 
   
-  library(stringr)
   sa_coord <- toString(sa_extent) %>% 
     str_extract_all("\\-*\\d+\\.*\\d*") %>% 
     unlist() %>% 
@@ -175,7 +194,6 @@ sa_download <- function(conn){
   osm_file <- file.path(cd,'temp','overpass.osm')
   
   # REQUEST THE DATA FROM THE API
-  library(utils)
   download.file(url = api, destfile = osm_file, extra = '-nv -O') 
   
   ifelse(
@@ -207,6 +225,7 @@ ifelse(
 pfbstyle_file <- file.path(cd,'temp','pfb.style')
 mapconfig_file <- file.path(cd,"temp","mapconfig.xml")
 mapconfigbikes_file <- file.path(cd,"temp","mapconfig_for_bicycles.xml")
+osm_file <- file.path(cd,'temp','overpass.osm')
 
 # CHECK IF THEY ARE DOWNLOADED
 if(
@@ -225,7 +244,6 @@ if(
   "https://raw.githubusercontent.com/pgRouting/osm2pgrouting/master/mapconfig_for_bicycles.xml"
   
   # REQUEST THE DATA
-  library(utils)
   download.file(url = pfbstyle_url, destfile = pfbstyle_file)
   download.file(url = mapconfig_url, destfile = mapconfig_file)
   download.file(url = mapconfigbikes_url, destfile = mapconfigbikes_file) 
@@ -235,13 +253,13 @@ if(
 
 #### - Load data with `osm2pgsql` and `osm2pgrouting`
 
-**NOTE:** To run this command [set path variables](https://learnosm.org/en/osm-data/osm2pgsql/) for `osm2pgsql` and `osm2pgrouting` and [create a password file](https://www.postgresql.org/docs/9.1/libpq-pgpass.html) on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password.
+**NOTE:** To run this command [set path variables](https://learnosm.org/en/osm-data/osm2pgsql/) for `osm2pgsql` and `osm2pgrouting` and [create a password file](https://www.postgresql.org/docs/9.1/libpq-pgpass.html) on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password. Also, change the paths to your local paths please :) I am trying to change this behavior
 
 ```{r, include = FALSE, warning = FALSE}
 system(
-  command = "osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S E:/GeoTech/Thesis/Thesis_R_Project/temp/pfb.style E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm --cache 600",
+  command = paste0("osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S ", pfbstyle_file, " ", osm_file, "--cache 600",
   show.output.on.console = TRUE
-  )
+  ))
 
 system(
   command = "osm2pgrouting -f E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm -h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf E:/GeoTech/Thesis/Thesis_R_Project/temp/mapconfig.xml --clean",
@@ -3258,15 +3276,12 @@ if (!dbExistsTable(connection, c("received","geostat"))){
     
     # DOWNLOAD THE FILE, UNZIP IT AND DELETE .ZIP
     
-    library(utils)
     download.file(url = geostat_url, destfile = geostat_file)
     unzip(geostat_file, exdir = geostat_exdir)
     file.remove(geostat_file)
   }
   
   # CALL DATA INTO R AND REPROJECT
-  library(sf)
-  
   table_path <- file.path(
     geostat_exdir,
     "Version 2_0_1/GEOSTAT_grid_POP_1K_2011_V2_0_1.csv"
@@ -3285,7 +3300,6 @@ if (!dbExistsTable(connection, c("received","geostat"))){
   names(pop_grid_t) <- pop_grid_t %>% names() %>% tolower()
   
   # LOAD TO POSTGRESQL
-  library(sqldf)
   sqldf(
     "
   DROP TABLE IF EXISTS received.pop_grid;
@@ -3296,13 +3310,13 @@ if (!dbExistsTable(connection, c("received","geostat"))){
   
   dbWriteTable(
     conn = connection,
-    name = c("received","pop_grid"),
+    name = Id(schema = "received", table = "pop_grid"),
     value = pop_grid_t
   )
   
   dbWriteTable(
     conn = connection,
-    name = c("received","pop_table"),
+    name = Id(schema = "received", table = "pop_table"),
     value = pop_table
   )
   
@@ -3338,7 +3352,7 @@ DROP TABLE IF EXISTS received.pop_table;
 #### - Generate subdivision with a grid, adding partial population and unique ID
 
 ```{r, warning = FALSE}
-sqldf::sqldf(
+sqldf(
   "
 DROP TABLE IF EXISTS received.sa_geostat;
 DROP INDEX IF EXISTS received.sa_geostat_geom_idx;
@@ -3365,9 +3379,6 @@ CREATE INDEX sa_geostat_geom_idx
 
 grid <- function(s = 9){
   ## Call it as an sf object and then transform it to CRS:3035 to create grid
-  library(sf)
-  library(dplyr, quietly = TRUE)
-  
   sa_pop_1km2 <- st_read(
     dsn = connection,
     layer = c("received", "sa_geostat")
@@ -3404,21 +3415,20 @@ grid <- function(s = 9){
 
 sa_grid <- grid(s = subdivisions) # Always consider a squared number to make an even division
 
-sqldf::sqldf(
+sqldf(
   "DROP TABLE IF EXISTS generated.sa_pop_grid",
   connection = connection
 )
 
 ## Load data into data base
-RPostgreSQL::dbWriteTable(
+dbWriteTable(
   conn = connection,
-  name = c("generated","sa_pop_grid"),
+  name = Id(schema = "generated", table = "sa_pop_grid"),
   value = sa_grid
 )
 ```
 
 ```{r, fig.width = 8, fig.height= 8,  echo = TRUE, warning = FALSE}
-library(tmap)
 tmap_mode("view")
 qtm(
   shp = sa_grid, 
@@ -3654,7 +3664,6 @@ CREATE INDEX IF NOT EXISTS idx_sa_rchblrdshistrss_t ON generated.sa_reachable_ro
 ```
 
 ```{r, include = FALSE, warning = FALSE}
-library(sqldf)
 sqldf(
   "
 VACUUM ANALYZE generated.sa_reachable_roads_high_stress;
@@ -3725,7 +3734,6 @@ SELECT * FROM generated.sa_reachable_roads_low_stress;
 ```
 
 ```{r, include = FALSE, warning = FALSE}
-library(sqldf)
 sqldf(
   "
 VACUUM ANALYZE generated.sa_reachable_roads_low_stress (base_road,target_road);
@@ -3807,7 +3815,6 @@ SELECT * FROM generated.sa_connected_pop_grid;
 ```
 
 ```{r, include = FALSE}
-library(sqldf)
 sqldf(
   "
 -- indexes
@@ -3831,7 +3838,6 @@ To compute access on this an the next step, a weighting procedure is used, as th
 A quick glance of the weights used, mainly for *step 11*:
 
 ```{r, echo = FALSE, warning = FALSE}
-library(kableExtra)
 tbl <- data.frame(
   scorcat = cell_spec(
     c(
@@ -9852,7 +9858,6 @@ kable(
 We can plot the results to have a quick view of the output, including the high and low stress network in an interactive way. 
 
 ```{r, warning = FALSE}
-library(sf)
 bna_score <- st_read(
   dsn = connection,
   layer = c("generated","sa_pop_grid")
@@ -9873,7 +9878,6 @@ bna_breaks <- c(6,12,18,24,30,36,42,48,54,100)
 stress_network$ft_stress <- ifelse(stress_network$ft_seg_stress == 1,"low stress","high stress")
 stress_network$tf_stress <- ifelse(stress_network$tf_seg_stress == 1,"low stress","high stress")
 
-library(tmap)
 tmap_mode("view")
 int_map <- 
   tmap::tmap_leaflet(
