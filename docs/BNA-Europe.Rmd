@@ -11,7 +11,7 @@ output:
     code_folding: hide
     df_print: tibble
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 [![GitHub](Figures/GitHub-Mark-32px.png "Click here to redirect to my repository")](https://github.com/loreabad6/masters-thesis-geotech) 
 
@@ -251,40 +251,43 @@ if(
 
 #### - Load data with `osm2pgsql` and `osm2pgrouting`
 
-**NOTE:** To run this command [set path variables](https://learnosm.org/en/osm-data/osm2pgsql/) for `osm2pgsql` and `osm2pgrouting` and [create a password file](https://www.postgresql.org/docs/9.1/libpq-pgpass.html) on %APPDATA%/postgresql/pgpass.conf with the format hostname:port:database:username:password. Also, change the paths to your local paths please :) I am trying to change this behavior
+**NOTE:** To run this command [set path variables](https://learnosm.org/en/osm-data/osm2pgsql/) for `osm2pgsql` and `osm2pgrouting` and [create a password file](https://www.postgresql.org/docs/current/libpq-pgpass.html) on `%APPDATA%/postgresql/pgpass.conf` with the format hostname:port:database:username:password. If the `%APPDATA%/postgresql/` directory does not exists, you can create it. 
 
-```{r, include = FALSE, warning = FALSE}
+```{r, echo = TRUE, include = FALSE, warning = FALSE}
 system(
-  command = paste0("osm2pgsql -c -d bna_europe -U postgres -H localhost -W --create --prefix sa_full -S ", pfbstyle_file, " ", osm_file, "--cache 600",
+  command = paste0(
+    "osm2pgsql -c -d ", db_name, 
+    " -U ", user_name, 
+    " -H ", local_host, 
+    " -W --create --prefix sa_full -S ", 
+    pfbstyle_file, " ", 
+    osm_file, " --cache 600",
   show.output.on.console = TRUE
   ))
 
 system(
-  command = "osm2pgrouting -f E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm -h localhost -d bna_europe --username postgres --schema received --prefix sa_all_ --conf E:/GeoTech/Thesis/Thesis_R_Project/temp/mapconfig.xml --clean",
+  command = paste0(
+    "osm2pgrouting -f ",
+    osm_file,
+    " -h ", local_host,
+    " -d ", db_name,
+    " --username ", user_name,
+    " --schema received --prefix sa_all_ --conf ",
+    mapconfig_file,
+    " --clean"),
   show.output.on.console = TRUE
 )
 
 system(
-  command = "osm2pgrouting -f E:/GeoTech/Thesis/Thesis_R_Project/temp/overpass.osm -h localhost  -d bna_europe --username postgres --schema received --prefix sa_bike_ --conf E:/GeoTech/Thesis/Thesis_R_Project/temp/mapconfig_for_bicycles.xml --clean",
-  show.output.on.console = TRUE
-)
-```
-
-Replace variables between `%`:
-
-```{r, echo = TRUE, eval = FALSE, include = TRUE, warning = FALSE}
-system(
-  command = "osm2pgsql -c -d %DBNAME% -U %USERNAME% -H %HOSTNAME% -W --create --prefix sa_full -S %CURRENTDIRECTORY/temp/pfb.style% %CURRENTDIRECTORY/temp/overpass.osm% --cache 600",
-  show.output.on.console = TRUE
-  )
-
-system(
-  command = "osm2pgrouting -f %CURRENTDIRECTORY/temp/overpass.osm% -h %HOSTNAME% --password %DBPASSWORD% -d %DBNAME% --username %USERNAME% --schema received --prefix sa_all_ --conf %CURRENTDIRECTORY/temp/mapconfig.xml% --clean",
-  show.output.on.console = TRUE
-)
-
-system(
-  command = "osm2pgrouting -f %CURRENTDIRECTORY/temp/overpass.osm% -h %HOSTNAME% --password %DBPASSWORD% -d %DBNAME% --username %USERNAME% --schema received --prefix sa_bike_ --conf %CURRENTDIRECTORY/temp/mapconfig_for_bicycles.xml% --clean",
+  command = paste0(
+    "osm2pgrouting -f ",
+    osm_file,
+    " -h ", local_host,
+    " -d ", db_name,
+    " --username ", user_name,
+    " --schema received --prefix sa_bike_ --conf ",
+    mapconfigbikes_file,
+    " --clean"),
   show.output.on.console = TRUE
 )
 ```
